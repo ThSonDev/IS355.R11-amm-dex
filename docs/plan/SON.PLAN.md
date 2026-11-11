@@ -9,7 +9,7 @@
 <a id="w0-son"></a>
 ### Sơn (Lead) - Tuần 0
 
-#### DV-01 · Dựng repo và quy trình
+#### DV-01 · Dựng repo và quy trình · [#3](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/3)
 
 - **Hạn:** T5 12/11 · **Ước lượng:** 1 ngày · **Phụ thuộc:** không
 - **Mục tiêu:** khung repo chuẩn để 4 người làm song song ngay.
@@ -26,7 +26,7 @@
 - **Output:** repo có khung; README có hướng dẫn cài.
 - **Done khi:** một thành viên khác clone và chạy `forge build` thành công.
 
-#### SC-01 · Viết interface contract và chốt
+#### SC-01 · Viết interface contract và chốt · [#8](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/8)
 
 - **Hạn:** CN 15/11 · **Ước lượng:** 1 ngày · **Phụ thuộc:** DV-01, phản hồi từ ALL-03
 - **Mục tiêu:** có ABI thật để frontend và backend làm song song khi contract chưa xong.
@@ -41,7 +41,7 @@
 - **Done khi:** compile được; Nhàn và Quyền xác nhận đủ.
 - **Bẫy:** đặt tên tham số và event khớp tuyệt đối với ARCHITECTURE; frontend decode event theo tên.
 
-#### DV-02 · Định dạng `deployments/<chain>.json` và script export
+#### DV-02 · Định dạng `deployments/<chain>.json` và script export · [#10](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/10)
 
 - **Hạn:** CN 15/11 · **Ước lượng:** 0.5 ngày · **Phụ thuộc:** SC-01
 - **Mục tiêu:** một nguồn địa chỉ và ABI duy nhất cho frontend và backend.
@@ -52,7 +52,7 @@
 - **Output:** `scripts/export-deployments.*`, `deployments/example.json`, mô tả định dạng trong README.
 - **Done khi:** Nhàn và Quyền load được file mẫu trong code của họ.
 
-#### DV-03 · Xin Sepolia ETH
+#### DV-03 · Xin Sepolia ETH · [#11](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/11)
 
 - **Hạn:** CN 15/11 (bắt đầu ngay T5) · **Ước lượng:** 0.5 ngày rải rác · **Phụ thuộc:** không
 - **Mục tiêu:** tránh rủi ro R3.
@@ -64,7 +64,7 @@
 - **Output:** ghi chú trong `docs/report-assets/sepolia-links.md` (địa chỉ ví, số dư, faucet).
 - **Done khi:** ví Deployer có đủ ETH cho ước tính ×2.
 
-#### PM-02 · Hỏi giảng viên
+#### PM-02 · Hỏi giảng viên · [#2](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/2)
 
 - **Hạn:** T6 13/11
 - Các câu hỏi:
@@ -83,7 +83,7 @@
 <a id="w1-son"></a>
 ### Sơn (Lead) - Tuần 1
 
-#### SC-10 · `AMMPair` (Core)
+#### SC-10 · `AMMPair` (Core) · [#16](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/16)
 
 - **Hạn:** T4 18/11 · **Ước lượng:** 2 ngày · **Phụ thuộc:** SC-01
 - **Mục tiêu:** lõi AMM: giữ reserve, mint/burn LP, swap theo x·y=k có phí, thu phí cho LP.
@@ -125,7 +125,7 @@
   - quên rằng lượng vào phải tính sau khi đã trừ phần chuyển ra;
   - phép nhân trong k-check phải nhân 10000 hai lần ở vế phải.
 
-#### SC-11 · `AMMRouter`
+#### SC-11 · `AMMRouter` · [#17](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/17)
 
 - **Hạn:** T6 20/11 · **Ước lượng:** 1.5 ngày · **Phụ thuộc:** SC-10
 - **Mục tiêu:** cửa giao tiếp an toàn cho người dùng: tỷ lệ tối ưu, slippage, deadline, event cho backend.
@@ -152,7 +152,7 @@
   - LP rút sau nhiều swap nhận giá trị mỗi LP lớn hơn (theo `sqrt(k)/S`);
   - event `SwapExecuted` có đúng các trường.
 
-#### SC-12 · Fuzz và invariant test
+#### SC-12 · Fuzz và invariant test · [#18](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/18)
 
 - **Hạn:** CN 22/11 · **Ước lượng:** 1 ngày · **Phụ thuộc:** SC-11
 - **Mục tiêu:** chứng minh tính đúng bằng kiểm thử tự động; đây là điểm nhấn trong báo cáo.
@@ -168,7 +168,7 @@
 - **Output:** `test/AMM.fuzz.t.sol`, `test/AMM.invariant.t.sol`, ảnh minh chứng.
 - **Done khi:** chạy với số lần fuzz mặc định mà pass; có ảnh chụp kết quả.
 
-#### DV-10 · Deploy, Seed v1 và `dev.sh` v1
+#### DV-10 · Deploy, Seed v1 và `dev.sh` v1 · [#19](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/19)
 
 - **Hạn:** CN 22/11 · **Ước lượng:** 1 ngày · **Phụ thuộc:** SC-11, SC-13, DV-02
 - **Mục tiêu:** một lệnh dựng môi trường local có pool sẵn để Nhàn làm giao diện.
@@ -194,7 +194,7 @@
 <a id="w2-son"></a>
 ### Sơn (Lead) - Tuần 2
 
-#### SC-20 · Deploy/Seed đầy đủ với governance và bảng quyền
+#### SC-20 · Deploy/Seed đầy đủ với governance và bảng quyền · [#31](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/31)
 
 - **Hạn:** T3 24/11 · **Ước lượng:** 1 ngày · **Phụ thuộc:** SC-14, SC-15, SC-16, SC-21 (khung Governor đã có từ SC-02)
 - **Mục tiêu:** cấu hình quyền đúng ARCHITECTURE 4.6 và 4.8; đây là cơ sở cho luận điểm non-custodial.
@@ -220,7 +220,7 @@
   5. Viết **forge test cho chính script deploy**: sau deploy, kiểm tra từng quyền đúng bảng 4.8 và deployer không còn quyền thừa.
 - **Done khi:** test quyền pass; bảng in ra khớp 4.8; ảnh chụp đưa vào báo cáo.
 
-#### DV-20 · `dev.sh` đầy đủ và `chain.sh`
+#### DV-20 · `dev.sh` đầy đủ và `chain.sh` · [#32](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/32)
 
 - **Hạn:** T4 25/11 · **Ước lượng:** 1 ngày · **Phụ thuộc:** SC-20, BE-12, BE-20
 - **Hướng dẫn logic:**
@@ -231,7 +231,7 @@
   5. `chain.sh`: lệnh `mine <N>` và `skip <giây>` (tăng thời gian + mine 1 block) cho governance.
 - **Done khi:** Minh hoặc Quyền chạy được `dev.sh --fresh` trên máy họ từ đầu đến cuối mà không cần hỏi.
 
-#### DV-21 · Deploy Sepolia và verify (M2a)
+#### DV-21 · Deploy Sepolia và verify (M2a) · [#33](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/33)
 
 - **Hạn:** T6 27/11 · **Ước lượng:** 1 ngày · **Phụ thuộc:** SC-20, DV-03
 - **Hướng dẫn logic:**
@@ -243,7 +243,7 @@
   6. Chạy thử 1 swap trên Sepolia qua giao diện.
 - **Done khi:** mọi contract hiện "Verified" trên Etherscan; giao diện kết nối Sepolia swap được.
 
-#### QA-20 · Tích hợp và phân loại bug
+#### QA-20 · Tích hợp và phân loại bug · [#34](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/34)
 
 - **Hạn:** CN 29/11 · **Ước lượng:** rải rác cả tuần
 - Ghép PR của mọi người; mỗi tối chạy `dev.sh --fresh` một lần trên `main`; ghi lỗi thành issue.
@@ -258,7 +258,7 @@
 <a id="w3-son"></a>
 ### Sơn (Lead) - Tuần 3
 
-#### QA-31 · Minh chứng Sepolia đầy đủ
+#### QA-31 · Minh chứng Sepolia đầy đủ · [#53](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/53)
 
 - **Hạn:** T4 02/12 · **Ước lượng:** 1 ngày · **Phụ thuộc:** DV-21, mọi tính năng
 - **Hướng dẫn logic:**
@@ -268,7 +268,7 @@
   4. Chụp link Etherscan của từng giao dịch, ghi vào `sepolia-links.md`.
 - **Done khi:** đủ link và video cho tiêu chí "triển khai và kiểm thử trên testnet".
 
-#### PM-31 · Cổng điểm cộng (T3 01/12)
+#### PM-31 · Cổng điểm cộng (T3 01/12) · [#49](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/49)
 
 - **Điều kiện mở cổng:** không còn bug mức chặn; tổng duyệt lần 1 đã qua.
 - **Đề xuất thứ tự** (chọn tối đa 2, mỗi cái ≤ 1 ngày):
@@ -277,14 +277,14 @@
   3. Factory + stablecoin giả (Sơn). **Chỉ làm khi mọi thứ khác xanh**, vì đụng interface.
 - Ghi quyết định vào issue.
 
-#### DOC-31 · Chương báo cáo của Lead + duyệt cuối
+#### DOC-31 · Chương báo cáo của Lead + duyệt cuối · [#57](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/57)
 
 - **Hạn:** T5 03/12 (chương của mình), T7 05/12 (duyệt toàn bộ).
 - Viết Ch1-4, 5.1, phần chung của Ch6.
 - **Nhấn mạnh** Non-custodial và Counterparty Risk (README mục 4), kèm bảng quyền 4.8 làm bằng chứng.
 - Duyệt cuối: đối chiếu bảng ARCHITECTURE mục 11; mỗi dòng phải chỉ được hình, bảng hoặc mục trong báo cáo làm bằng chứng.
 
-#### DV-30 · Đóng gói nộp
+#### DV-30 · Đóng gói nộp · [#65](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/65)
 
 - **Hạn:** CN 06/12.
 - README hướng dẫn chạy từ đầu, có danh sách phiên bản công cụ.

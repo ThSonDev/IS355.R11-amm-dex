@@ -9,7 +9,7 @@
 <a id="w0-quyen"></a>
 ### Quyền - Tuần 0
 
-#### BE-01 · Khung backend và IPFS
+#### BE-01 · Khung backend và IPFS · [#14](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/14)
 
 - **Hạn:** CN 15/11 · **Ước lượng:** 1.5 ngày · **Phụ thuộc:** DV-01
 - **Mục tiêu:** backend chạy được, nói chuyện được với Kubo; kiểm chứng CID giữa Kubo và Pinata.
@@ -26,7 +26,7 @@
 - **Output:** `backend/` chạy bằng một lệnh; ghi chú kết quả so sánh CID.
 - **Done khi:** `/health` báo RPC và IPFS OK; upload xong mở được `http://localhost:8080/ipfs/<CID>`.
 
-#### BE-02 · Tạo cặp khóa RSA cho Auditor và quy ước khóa
+#### BE-02 · Tạo cặp khóa RSA cho Auditor và quy ước khóa · [#15](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/15)
 
 - **Hạn:** CN 15/11 · **Ước lượng:** 0.5 ngày · **Phụ thuộc:** không
 - **Hướng dẫn logic:**
@@ -47,7 +47,7 @@
 <a id="w1-quyen"></a>
 ### Quyền - Tuần 1
 
-#### BE-10 · Module crypto
+#### BE-10 · Module crypto · [#27](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/27)
 
 - **Hạn:** T4 18/11 · **Ước lượng:** 1 ngày · **Phụ thuộc:** BE-02
 - **Mục tiêu:** mã hóa biên lai theo ARCHITECTURE 5.1 (rubric TC2).
@@ -64,7 +64,7 @@
   - cùng txHash ra cùng K, khác txHash ra khác K;
   - RSA bọc rồi mở ra đúng K.
 
-#### BE-11 · Thử nghiệm interop: Python mã hóa, trình duyệt giải mã
+#### BE-11 · Thử nghiệm interop: Python mã hóa, trình duyệt giải mã · [#28](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/28)
 
 - **Hạn:** T6 20/11 · **Ước lượng:** 1 ngày · **Phụ thuộc:** BE-10
 - **Mục tiêu:** xử lý rủi ro R4 sớm.
@@ -77,7 +77,7 @@
 - **Done khi:** trình duyệt giải mã đúng envelope do Python tạo.
 - **Nếu thất bại sau 1 ngày:** báo Lead, chuyển sang Kế hoạch B của R4.
 
-#### BE-12 · Token list và logo lên IPFS
+#### BE-12 · Token list và logo lên IPFS · [#29](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/29)
 
 - **Hạn:** CN 22/11 · **Ước lượng:** 1 ngày · **Phụ thuộc:** BE-01; SC-16 cho bước cuối
 - **Mục tiêu:** README TC3 (Token List kèm hash logo) và rubric TC3 (dữ liệu ảnh + JSON).
@@ -93,7 +93,7 @@
 - **Output:** script, logo trong `backend/assets/`.
 - **Done khi:** mở `localhost:8080/ipfs/<CID>` thấy JSON; trong JSON, `logoURI` trỏ tới ảnh mở được.
 
-#### DOC-01 · Template báo cáo, slide và dàn ý
+#### DOC-01 · Template báo cáo, slide và dàn ý · [#30](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/30)
 
 - **Hạn:** CN 22/11 · **Ước lượng:** 1 ngày · **Phụ thuộc:** PM-02 (yêu cầu của giảng viên, nếu có)
 - **Mục tiêu:** đạt chắc các điểm format của TC5 ngay từ đầu.
@@ -133,7 +133,7 @@
 <a id="w2-quyen"></a>
 ### Quyền - Tuần 2
 
-#### BE-20 · Listener, biên lai, memo, hàng đợi giao dịch
+#### BE-20 · Listener, biên lai, memo, hàng đợi giao dịch · [#44](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/44)
 
 - **Hạn:** T5 26/11 · **Ước lượng:** 2 ngày · **Phụ thuộc:** BE-10, SC-11, SC-16, DV-10
 - **Mục tiêu:** README TC3: giao dịch lớn thì tự tạo biên lai số và đẩy lên IPFS.
@@ -164,7 +164,7 @@
   - hai swap lớn liên tiếp không lỗi nonce;
   - log rõ ràng.
 
-#### BE-21 · Xác thực chữ ký, cấp khóa, upload proposal
+#### BE-21 · Xác thực chữ ký, cấp khóa, upload proposal · [#45](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/45)
 
 - **Hạn:** T6 27/11 · **Ước lượng:** 1.5 ngày · **Phụ thuộc:** BE-20, SC-14
 - **Hướng dẫn logic:**
@@ -197,7 +197,7 @@
   - không phải trader → 403; auditor → 200; sau khi revoke → 403;
   - file không phải PDF → 400; votes thiếu → 403.
 
-#### FE-23 · Trang History & Receipts
+#### FE-23 · Trang History & Receipts · [#46](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/46)
 
 - **Hạn:** CN 29/11 · **Ước lượng:** 1.5 ngày · **Phụ thuộc:** FE-10, BE-11, BE-21
 - **Mục tiêu:** README TC3 (xem lại phiếu giao dịch qua link IPFS gắn trên ID giao dịch).
@@ -218,7 +218,7 @@
   - ví khác bị 403;
   - được cấp `AUDITOR_ROLE` thì xem được, bị thu hồi thì lại 403.
 
-#### BE-22 · `audit_cli`
+#### BE-22 · `audit_cli` · [#47](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/47)
 
 - **Hạn:** CN 29/11 · **Ước lượng:** 0.5 ngày · **Phụ thuộc:** BE-10
 - **Hướng dẫn logic:** lệnh `decrypt <txHash|CID> --key <pem>`:
@@ -237,11 +237,11 @@
 <a id="w3-quyen"></a>
 ### Quyền - Tuần 3
 
-#### QA-34 · Sửa bug backend và Receipts
+#### QA-34 · Sửa bug backend và Receipts · [#52](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/52)
 
 - **Hạn:** T3 01/12 · Theo issue từ QA-21/QA-30.
 
-#### DOC-36 · Chương 5.3
+#### DOC-36 · Chương 5.3 · [#55](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/55)
 
 - **Hạn:** T4 02/12
 - **Nội dung:**
@@ -251,7 +251,7 @@
   - xác thực chữ ký;
   - **giới hạn** (ARCHITECTURE 5.1).
 
-#### DOC-37 · Biên tập báo cáo tổng
+#### DOC-37 · Biên tập báo cáo tổng · [#64](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/64)
 
 - **Hạn:** T7 05/12 · **Ước lượng:** 1.5 ngày · **Phụ thuộc:** DOC-30 (mọi chương, hạn T5 03/12)
 - **Hướng dẫn logic:**

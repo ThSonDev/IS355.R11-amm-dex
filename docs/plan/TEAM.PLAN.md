@@ -9,7 +9,7 @@
 <a id="w0-all"></a>
 ### Cả nhóm - Tuần 0
 
-#### ALL-01 · Cài môi trường
+#### ALL-01 · Cài môi trường · [#4](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/4)
 
 - **Hạn:** T6 13/11 · **Ước lượng:** 0.5 ngày · **Phụ thuộc:** DV-01 (repo đã dựng)
 - **Mục tiêu:** ai cũng chạy được mọi phần của dự án, không chỉ phần của mình.
@@ -23,7 +23,7 @@
 - **Done khi:** chạy được `forge --version`, `node -v`, `python --version`, `ipfs version`; MetaMask thấy 6 ví Anvil.
 - **Bẫy:** Foundry cần thêm `~/.foundry/bin` vào PATH và mở lại terminal; đừng dùng ví cá nhân.
 
-#### ALL-02 · Bài tập toán AMM
+#### ALL-02 · Bài tập toán AMM · [#5](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/5)
 
 - **Hạn:** T7 14/11 · **Ước lượng:** 0.5 ngày · **Phụ thuộc:** không
 - **Mục tiêu:** ai cũng tự tính được swap, phí, LP; đây là câu hỏi phản biện chắc chắn gặp.
@@ -36,14 +36,14 @@
 - **Output:** đáp án gửi nhóm. Đáp án câu 1 xấp xỉ 90,66 B.
 - **Done khi:** cả 4 người ra cùng kết quả và giải thích được câu 2.
 
-#### ALL-03 · Đọc và phản hồi ARCHITECTURE + PLAN
+#### ALL-03 · Đọc và phản hồi ARCHITECTURE + PLAN · [#6](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/6)
 
 - **Hạn:** T7 14/11 · **Ước lượng:** 0.5 ngày · **Phụ thuộc:** không
 - **Mục tiêu:** phát hiện chỗ khó hiểu hoặc sai trước khi chốt interface.
 - **Hướng dẫn logic:** đọc kỹ phần mình phụ trách và phần mình phải dùng (ví dụ Nhàn đọc kỹ mục 4.3, 7). Ghi câu hỏi thành comment trong issue "ARCHITECTURE review".
 - **Done khi:** mỗi người có ít nhất 1 nhận xét hoặc xác nhận "đã hiểu" cho từng mục liên quan.
 
-#### PM-01 · Họp kickoff
+#### PM-01 · Họp kickoff · [#1](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/1)
 
 - **Hạn:** T6 13/11 · Chủ trì: Sơn
 - Nội dung:
@@ -77,7 +77,7 @@
 ### Cả nhóm - Tuần 2
 
 - **Viết nháp chương báo cáo** của mình (chỉ gạch đầu dòng + ảnh minh chứng đã thu), hạn **CN 29/11**.
-- **QA-21 · Tổng duyệt lần 1** (CN 29/11, cả nhóm, chủ trì Sơn):
+- **QA-21 · Tổng duyệt lần 1** · [#35](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/35) (CN 29/11, cả nhóm, chủ trì Sơn):
   - chạy toàn bộ kịch bản ở ARCHITECTURE từ `dev.sh --fresh`;
   - ghi mọi lỗi thành issue có nhãn `bug`, phân mức chặn / không chặn;
   - **mọi lỗi mức chặn phải sửa xong trước T3 01/12** (cổng điểm cộng).
@@ -91,7 +91,7 @@
 <a id="w3-all"></a>
 ### Cả nhóm - Tuần 3
 
-#### QA-30 · Bug bash chéo
+#### QA-30 · Bug bash chéo · [#48](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/48)
 
 - **Hạn:** T2 30/11 · **Ước lượng:** 0.5 ngày mỗi người
 - Mỗi người test phần của người khác như một người dùng "vụng về": nhập số âm, số rất lớn, đổi ví giữa chừng, đổi mạng, từ chối ký, mạng chậm.
@@ -108,13 +108,13 @@
 | 2 | T4 02/12 | Theo `demo-script.md`, bấm giờ, có người đóng vai giảng viên hỏi phản biện |
 | 3 | T7 05/12 | **Tắt Wi-Fi**, chạy từ `dev.sh` trên đúng laptop sẽ dùng khi demo, đúng thứ tự như thật |
 
-#### DOC-30 · Viết chương báo cáo
+#### DOC-30 · Viết chương báo cáo · [#56](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/56)
 
 - **Hạn:** nộp bản đầy đủ cho Quyền vào **T5 03/12**.
 - Mỗi người hoàn thiện chương của mình theo DOC-01.
 - Mỗi hình và bảng phải có caption; mỗi viết tắt mới phải ghi vào bảng viết tắt; mỗi nguồn tham khảo phải ghi vào danh mục.
 
-#### PM-30 · Chuẩn bị câu hỏi phản biện
+#### PM-30 · Chuẩn bị câu hỏi phản biện · [#62](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/62)
 
 - **Hạn:** T6 04/12.
 - Mỗi người viết 5 câu hỏi khó về phần mình kèm câu trả lời, ví dụ:

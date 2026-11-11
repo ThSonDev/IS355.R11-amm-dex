@@ -9,7 +9,7 @@
 <a id="w0-nhan"></a>
 ### Nhàn - Tuần 0
 
-#### FE-01 · Khung frontend và kết nối ví
+#### FE-01 · Khung frontend và kết nối ví · [#12](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/12)
 
 - **Hạn:** CN 15/11 · **Ước lượng:** 1.5 ngày · **Phụ thuộc:** DV-01
 - **Mục tiêu:** khung chạy được, kết nối MetaMask với Anvil; kiểm chứng rủi ro R6.
@@ -24,7 +24,7 @@
 - **Output:** `frontend/` chạy bằng `npm run dev`; ảnh chụp kết nối ví.
 - **Done khi:** kết nối và ngắt ví được; đổi sang mạng khác thì thấy cảnh báo; chạy được khi offline.
 
-#### FE-02 · Wireframe 4 trang
+#### FE-02 · Wireframe 4 trang · [#13](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/13)
 
 - **Hạn:** CN 15/11 · **Ước lượng:** 1 ngày · **Phụ thuộc:** không
 - **Mục tiêu:** thống nhất giao diện trước khi code; ai làm trang Governance hay Receipts cũng theo cùng một kiểu.
@@ -46,7 +46,7 @@
 <a id="w1-nhan"></a>
 ### Nhàn - Tuần 1
 
-#### FE-10 · Lớp cấu hình contract và hooks dùng chung
+#### FE-10 · Lớp cấu hình contract và hooks dùng chung · [#24](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/24)
 
 - **Hạn:** T3 17/11 · **Ước lượng:** 1 ngày · **Phụ thuộc:** DV-02, FE-01
 - **Mục tiêu:** cả nhóm frontend (Nhàn, Minh, Quyền) dùng chung một cách đọc/ghi contract.
@@ -62,7 +62,7 @@
 - **Done khi:** một trang thử đọc được số dư TKA của ví đang kết nối trên Anvil.
 - **Bẫy:** số token là `bigint`; đổi qua `number` sẽ mất chính xác.
 
-#### FE-11 · Trang Swap v1
+#### FE-11 · Trang Swap v1 · [#25](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/25)
 
 - **Hạn:** CN 22/11 · **Ước lượng:** 2.5 ngày · **Phụ thuộc:** FE-10, SC-11 (trước khi SC-11 merge thì dùng công thức mô phỏng ở client)
 - **Mục tiêu:** README TC2: nhập số lượng, tỷ giá realtime, price impact, bảo vệ slippage.
@@ -91,7 +91,7 @@
   - dùng `Date.now()` cho deadline;
   - quên đọc lại allowance sau khi approve.
 
-#### FE-12 · Header: ví, mạng, faucet
+#### FE-12 · Header: ví, mạng, faucet · [#26](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/26)
 
 - **Hạn:** T4 18/11 · **Ước lượng:** 0.5 ngày · **Phụ thuộc:** FE-01, SC-13
 - **Hướng dẫn logic:**
@@ -113,7 +113,7 @@
 
 Trang lớn, chia 3 PR.
 
-**FE-20a · Thêm/rút thanh khoản**
+**FE-20a · Thêm/rút thanh khoản** · [#39](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/39)
 
 - **Hạn:** T3 24/11 · **Ước lượng:** 1 ngày · **Phụ thuộc:** FE-10, SC-11
 - **Hướng dẫn logic:**
@@ -130,7 +130,7 @@ Trang lớn, chia 3 PR.
   3. Hiển thị số LP của ví, phần sở hữu (%), giá trị quy ra TKA/TKB.
 - **Done khi:** thêm và rút thành công, số liệu dự kiến khớp số thực nhận (sai lệch trong mức làm tròn).
 
-**FE-20b · Pool Dashboard**
+**FE-20b · Pool Dashboard** · [#40](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/40)
 
 - **Hạn:** T5 26/11 · **Ước lượng:** 1 ngày · **Phụ thuộc:** FE-20a, SC-10 (`feeAccrued`)
 - **Mục tiêu:** README TC2 (TVL + phần thưởng dự kiến cho LP) và README Workflow (thấy phí cộng vào pool).
@@ -143,7 +143,7 @@ Trang lớn, chia 3 PR.
   6. **ô "Trước/Sau swap gần nhất"**: k, `sqrt(k)/S`, `feeAccrued` của lần swap trước và sau. Đây là bằng chứng phí vào pool khi demo.
 - **Done khi:** sau một swap, ô Trước/Sau cho thấy `k` và `sqrt(k)/S` tăng, `feeAccrued` tăng đúng bằng phí.
 
-**FE-20c · Farm**
+**FE-20c · Farm** · [#41](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/41)
 
 - **Hạn:** T7 28/11 · **Ước lượng:** 1 ngày · **Phụ thuộc:** FE-20a, SC-15
 - **Hướng dẫn logic:**
@@ -155,7 +155,7 @@ Trang lớn, chia 3 PR.
      - Exit.
 - **Done khi:** stake, chờ, claim thì số DEX nhận khớp `earned`.
 
-#### FE-22 · Ô memo trên trang Swap
+#### FE-22 · Ô memo trên trang Swap · [#42](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/42)
 
 - **Hạn:** T7 28/11 · **Ước lượng:** 0.5 ngày · **Phụ thuộc:** FE-11, BE-20
 - **Hướng dẫn logic:**
@@ -164,7 +164,7 @@ Trang lớn, chia 3 PR.
   - Nếu ước tính đây là giao dịch lớn (amountIn ≥ 2% reserve), hiển thị nhãn "Giao dịch lớn - sẽ có biên lai".
 - **Done khi:** swap lớn có memo thì biên lai sau khi giải mã chứa đúng memo.
 
-#### QA-22 · Nháp `demo-script.md`
+#### QA-22 · Nháp `demo-script.md` · [#43](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/43)
 
 - **Hạn:** CN 29/11 · **Ước lượng:** 0.5 ngày · **Phụ thuộc:** QA-20
 - **Hướng dẫn logic:** liệt kê từng bước demo:
@@ -199,7 +199,7 @@ Trang lớn, chia 3 PR.
 <a id="w3-nhan"></a>
 ### Nhàn - Tuần 3
 
-#### QA-33 · `demo-script.md` bản chốt
+#### QA-33 · `demo-script.md` bản chốt · [#51](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/51)
 
 - **Hạn:** T3 01/12 · **Phụ thuộc:** QA-22, kết quả tổng duyệt lần 1
 - Hoàn thiện từ bản nháp:
@@ -208,14 +208,14 @@ Trang lớn, chia 3 PR.
   - ai thao tác, ai thuyết minh;
   - phương án khi lỗi (chuyển sang video đoạn tương ứng).
 
-#### FE-30 · Hoàn thiện giao diện
+#### FE-30 · Hoàn thiện giao diện · [#54](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/54)
 
 - **Hạn:** T4 02/12 · **Ước lượng:** 1 ngày
 - Thống nhất style 4 trang (kể cả trang của Minh và Quyền).
 - Kiểm tra tương phản màu, cỡ chữ đọc được khi chiếu.
 - Thêm trạng thái loading và trạng thái trống; câu thông báo lỗi bằng tiếng Việt.
 
-#### DOC-33 · Slide
+#### DOC-33 · Slide · [#59](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/59)
 
 - **Hạn:** T5 03/12 · **Ước lượng:** 1 ngày · **Phụ thuộc:** DOC-01, chương của mọi người
 - **Hướng dẫn logic:**
@@ -223,7 +223,7 @@ Trang lớn, chia 3 PR.
   2. Chữ ≥ 18; mỗi hình có caption; slide cuối là tài liệu tham khảo.
 - **Done khi:** thuyết trình thử vừa thời lượng giảng viên yêu cầu.
 
-#### DOC-34 · Video demo có phụ đề
+#### DOC-34 · Video demo có phụ đề · [#63](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/63)
 
 - **Hạn:** T6 04/12 · **Ước lượng:** 1 ngày · **Phụ thuộc:** QA-33
 - **Hướng dẫn logic:**
@@ -232,7 +232,7 @@ Trang lớn, chia 3 PR.
   3. Chia chương theo bước để khi demo trực tiếp lỗi có thể nhảy đúng đoạn.
 - **Done khi:** cả nhóm xem lại và không thấy bước nào thiếu phụ đề.
 
-#### DOC-35 · Chương 5.4 và Ch7
+#### DOC-35 · Chương 5.4 và Ch7 · [#60](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/60)
 
 - **Hạn:** T5 03/12
 - 5.4: frontend, luồng "giá chính xác trước khi xác nhận", xử lý lỗi.

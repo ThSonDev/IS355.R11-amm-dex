@@ -9,7 +9,7 @@
 <a id="w0-minh"></a>
 ### Minh - Tuần 0
 
-#### SC-02 · Kiểm chứng OpenZeppelin v5
+#### SC-02 · Kiểm chứng OpenZeppelin v5 · [#9](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/9)
 
 - **Hạn:** CN 15/11 · **Ước lượng:** 1 ngày · **Phụ thuộc:** DV-01
 - **Mục tiêu:** xử lý các mục chưa chắc ở ARCHITECTURE mục 14 trước khi chốt interface.
@@ -25,7 +25,7 @@
 - **Done khi:** compile pass; test biên pass; mục 14 dòng 1-3 được tick.
 - **Bẫy:** Wizard có thể chọn clock theo timestamp; phải chọn **block number** để khớp ARCHITECTURE.
 
-#### ALL-04 (Minh) · Học Foundry cơ bản
+#### ALL-04 (Minh) · Học Foundry cơ bản · [#7](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/7)
 
 - **Hạn:** CN 15/11 · **Ước lượng:** 1 ngày
 - Làm theo Foundry Book phần "Writing tests": test một ERC20 đơn giản với `vm.prank`, `vm.expectRevert`, `vm.warp`.
@@ -40,7 +40,7 @@
 <a id="w1-minh"></a>
 ### Minh - Tuần 1
 
-#### SC-13 · `TestToken` (TokenA, TokenB)
+#### SC-13 · `TestToken` (TokenA, TokenB) · [#20](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/20)
 
 - **Hạn:** T3 17/11 · **Ước lượng:** 0.5 ngày · **Phụ thuộc:** SC-01
 - **Mục tiêu:** hai token ERC-20 để giao dịch (README TC4); task khởi động cho Solidity.
@@ -50,7 +50,7 @@
   3. `faucet`: lưu thời điểm nhận gần nhất của từng địa chỉ. Nếu chưa đủ 24h thì revert `FaucetCooldown` (kèm thời điểm được nhận lại). Ngược lại mint 1.000 token, emit `FaucetClaimed`.
 - **Done khi:** có test mint bởi owner/người lạ, faucet lần 1 thành công, lần 2 revert, sau `vm.warp` 24h thì nhận lại được, sau `renounceOwnership` thì không ai mint được.
 
-#### SC-14 · `DEXToken`
+#### SC-14 · `DEXToken` · [#21](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/21)
 
 - **Hạn:** T4 18/11 · **Ước lượng:** 0.5 ngày · **Phụ thuộc:** SC-02
 - **Mục tiêu:** token thưởng và token biểu quyết.
@@ -63,7 +63,7 @@
   - chuyển token thì quyền vote đi theo;
   - `getPastVotes` ở block cũ không đổi.
 
-#### SC-15 · `StakingRewards`
+#### SC-15 · `StakingRewards` · [#22](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/22)
 
 - **Hạn:** T7 21/11 · **Ước lượng:** 2 ngày · **Phụ thuộc:** SC-14 (cần LP token để test; dùng một ERC20 giả làm LP)
 - **Mục tiêu:** Yield Farming: stake LP, nhận DEX (README TC4).
@@ -87,7 +87,7 @@
   - chia cho tổng stake = 0;
   - quên nhân 1e18 khi tính "thưởng trên mỗi LP" nên mất độ chính xác.
 
-#### SC-16 · `DEXRegistry`
+#### SC-16 · `DEXRegistry` · [#23](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/23)
 
 - **Hạn:** CN 22/11 · **Ước lượng:** 1 ngày · **Phụ thuộc:** SC-01
 - **Mục tiêu:** RBAC cho tài nguyên IPFS (rubric TC3).
@@ -110,7 +110,7 @@
 <a id="w2-minh"></a>
 ### Minh - Tuần 2
 
-#### SC-21 · Governor + Timelock + test governance end-to-end
+#### SC-21 · Governor + Timelock + test governance end-to-end · [#36](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/36)
 
 - **Hạn:** T3 24/11 · **Ước lượng:** 1.5 ngày · **Phụ thuộc:** SC-02, SC-14, SC-10
 - **Mục tiêu:** đề xuất đổi phí qua bỏ phiếu (README TC3, Governance Proposals).
@@ -131,7 +131,7 @@
      - gọi `setFee` trực tiếp không qua Timelock → revert.
 - **Done khi:** mọi test pass; ghi lại các bước để đưa vào chương báo cáo.
 
-#### SC-22 · Rà bảo mật và NatSpec
+#### SC-22 · Rà bảo mật và NatSpec · [#37](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/37)
 
 - **Hạn:** T5 26/11 · **Ước lượng:** 1 ngày · **Phụ thuộc:** SC-10..SC-21
 - **Hướng dẫn logic:**
@@ -142,7 +142,7 @@
 - **Output:** `docs/security-checklist.md`, PR thêm NatSpec, comment review vào PR của Sơn.
 - **Done khi:** Lead duyệt checklist.
 
-#### FE-21 · Trang Governance
+#### FE-21 · Trang Governance · [#38](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/38)
 
 - **Hạn:** CN 29/11 · **Ước lượng:** 2.5 ngày · **Phụ thuộc:** FE-10, SC-21, BE-21 (endpoint upload PDF)
 - **Mục tiêu:** README TC3: tài liệu đề xuất thay đổi phí lưu IPFS; người dùng thao tác bỏ phiếu.
@@ -176,17 +176,17 @@
 <a id="w3-minh"></a>
 ### Minh - Tuần 3
 
-#### QA-32 · Sửa bug contract và giao diện Governance
+#### QA-32 · Sửa bug contract và giao diện Governance · [#50](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/50)
 
 - **Hạn:** T3 01/12 · Theo issue từ QA-21/QA-30.
 
-#### DV-31 · CI GitHub Actions (điểm cộng, nếu cổng mở)
+#### DV-31 · CI GitHub Actions (điểm cộng, nếu cổng mở) · [#61](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/61)
 
 - **Hạn:** T5 03/12 · **Ước lượng:** 0.5 ngày
 - **Hướng dẫn logic:** workflow chạy trên mỗi PR, gồm cài Foundry → `forge build` → `forge test`, và cài Python → pytest phần không cần Kubo. Badge trạng thái trên README.
 - **Done khi:** PR mới có dấu tick xanh.
 
-#### DOC-32 · Chương 5.2 và phần kiểm thử contract trong Ch6
+#### DOC-32 · Chương 5.2 và phần kiểm thử contract trong Ch6 · [#58](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/58)
 
 - **Hạn:** T5 03/12
 - **Nội dung:**
