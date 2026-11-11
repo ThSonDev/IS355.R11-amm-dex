@@ -1,1 +1,6 @@
 tmp/
+
+# local AI tooling and private helper scripts
+CLAUDE.md
+.claude/
+scripts/github/

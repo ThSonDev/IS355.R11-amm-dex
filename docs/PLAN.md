@@ -116,7 +116,7 @@ Nhóm có khoảng 3,5 tuần để làm xong một sàn đổi token phi tập 
 <a id="a4"></a>
 ## A4. Cách đọc một task và Definition of Done
 
-**Mã task** có dạng `<NHÓM>-<SỐ>`. Mỗi task là một GitHub Issue có tiêu đề `[<mã>] <tên>`, nằm trong milestone M0-M3 và GitHub Project của nhóm. Issue được sinh từ PLAN bằng `scripts/github/sync_issues.py`: sửa PLAN rồi chạy lại script, không sửa tay nội dung issue.
+**Mã task** có dạng `<NHÓM>-<SỐ>`. Mỗi task là một GitHub Issue có tiêu đề `[<mã>] <tên>`, nằm trong milestone M0-M3 và GitHub Project của nhóm. Nội dung issue được đồng bộ từ PLAN: muốn đổi task thì sửa PLAN rồi báo Lead đồng bộ lại, không sửa tay nội dung issue.
 
 | Nhóm | Nghĩa |
 |---|---|
@@ -280,7 +280,7 @@ Chi tiết từng người nằm trong `docs/plan/`: [Cả nhóm](plan/TEAM.PLAN
 <a id="c-summary"></a>
 # Phần C - Bảng tổng hợp task
 
-Nguồn để sinh GitHub Issues (`scripts/github/sync_issues.py`). Cột Issue dẫn tới issue tương ứng.
+Nguồn của GitHub Issues. Cột Issue dẫn tới issue tương ứng.
 
 | Mã | Issue | Tên | Người | Hạn | Phụ thuộc | Milestone |
 |---|---|---|---|---|---|---|
