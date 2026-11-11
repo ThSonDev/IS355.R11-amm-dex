@@ -12,13 +12,47 @@
 **Phần B - Chi tiết theo tuần và thành viên**
 
 | Tuần | Cả nhóm | Sơn (Lead) | Minh | Nhàn | Quyền |
-|---|---|---|---|---|---|---|
+|---|---|---|---|---|---|
 | **Tuần 0** (12-15/11) Khởi động | [Cả nhóm](plan/TEAM.PLAN.md#w0-all) | [Sơn](plan/SON.PLAN.md#w0-son) | [Minh](plan/MINH.PLAN.md#w0-minh) | [Nhàn](plan/NHAN.PLAN.md#w0-nhan) | [Quyền](plan/QUYEN.PLAN.md#w0-quyen) |
 | **Tuần 1** (16-22/11) Lõi | [Cả nhóm](plan/TEAM.PLAN.md#w1-all) | [Sơn](plan/SON.PLAN.md#w1-son) | [Minh](plan/MINH.PLAN.md#w1-minh) | [Nhàn](plan/NHAN.PLAN.md#w1-nhan) | [Quyền](plan/QUYEN.PLAN.md#w1-quyen) |
 | **Tuần 2** (23-29/11) Đủ tính năng | [Cả nhóm](plan/TEAM.PLAN.md#w2-all) | [Sơn](plan/SON.PLAN.md#w2-son) | [Minh](plan/MINH.PLAN.md#w2-minh) | [Nhàn](plan/NHAN.PLAN.md#w2-nhan) | [Quyền](plan/QUYEN.PLAN.md#w2-quyen) |
 | **Tuần 3** (30/11-06/12) Hoàn thiện | [Cả nhóm](plan/TEAM.PLAN.md#w3-all) | [Sơn](plan/SON.PLAN.md#w3-son) | [Minh](plan/MINH.PLAN.md#w3-minh) | [Nhàn](plan/NHAN.PLAN.md#w3-nhan) | [Quyền](plan/QUYEN.PLAN.md#w3-quyen) |
 
 **Phần C** - [Bảng tổng hợp task](#c-summary) (dùng để tạo GitHub Issues)
+
+## Bức tranh chung
+
+Nhóm có khoảng 3,5 tuần để làm xong một sàn đổi token phi tập trung, kèm báo cáo, slide và video demo. Việc được chia thành 4 chặng, chặng sau xây trên chặng trước:
+
+1. **Khởi động (12-15/11).**
+   - Mọi người cài công cụ, học cách sàn tính giá.
+   - Cả nhóm thống nhất "bản mô tả các nút bấm" của hợp đồng thông minh, tức là hợp đồng có những chức năng gì, nhận gì và trả về gì.
+   - Đây là bước quan trọng nhất: có bản mô tả chung thì 4 người làm song song được, không phải chờ nhau.
+2. **Làm phần lõi (16-22/11).**
+   - Xây phần quan trọng nhất trước: góp vốn, đổi token, rút vốn.
+   - Cuối tuần phải đổi được token thật trên giao diện, dù giao diện còn thô.
+   - Song song, các phần phụ (token thưởng, phân quyền, mã hóa) được chuẩn bị riêng.
+3. **Ghép đủ tính năng (23-29/11).**
+   - Nối mọi phần lại với nhau: staking, bỏ phiếu đổi phí, phiếu giao dịch trên IPFS, các trang còn lại của website.
+   - Đưa hệ thống lên mạng thử nghiệm Sepolia.
+   - Ngày 29/11 **ngừng thêm tính năng mới** và chạy thử toàn bộ lần đầu.
+4. **Hoàn thiện (30/11-06/12).**
+   - Chỉ sửa lỗi, làm đẹp, viết báo cáo, làm slide, quay video và tập demo 3 lần.
+   - Điểm cộng chỉ được làm khi mọi thứ bắt buộc đã chạy ổn.
+
+**Cách làm việc** (chi tiết ở Phần A):
+
+- Mỗi việc là một thẻ có hạn và người phụ trách rõ ràng. Thẻ chỉ tính là xong khi người khác chạy thử được.
+- Mỗi tối báo ngắn tiến độ; tối Chủ nhật họp tuần để xem lại.
+- Bị kẹt quá nửa buổi thì báo ngay.
+- Thứ tự ưu tiên: đủ yêu cầu của đề → demo không lỗi → báo cáo đúng format → làm đẹp → điểm cộng.
+
+**Ai làm gì:**
+
+- **Sơn:** điều phối, phần lõi của sàn, ghép hệ thống, đưa lên mạng thử nghiệm.
+- **Minh:** các token, staking, bỏ phiếu, phân quyền.
+- **Nhàn:** website, kịch bản demo, slide, video.
+- **Quyền:** máy chủ phụ trợ, lưu trữ IPFS, mã hóa, biên tập báo cáo.
 
 ---
 
@@ -208,7 +242,7 @@ Làm **trong lúc** code, không để dồn về cuối.
 ## A9. Rủi ro và dự phòng
 
 | # | Rủi ro | Khả năng | Ảnh hưởng | Phòng ngừa | Kế hoạch B |
-|---|---|---|---|---|---|---|
+|---|---|---|---|---|---|
 | R1 | Học Solidity chậm, contract trễ | Trung bình | Cao | Tuần 0 học có bài tập; interface chốt sớm; review chéo | Lead nhận bớt việc của Minh; Minh chuyển sang viết test |
 | R2 | Frontend quá tải (một người) | Cao | Cao | Lát dọc: Minh làm trang Governance, Quyền làm trang Receipts | Sơn nhận phần Farm của trang Pool |
 | R3 | Không xin được Sepolia ETH | Trung bình | Cao (TC1) | Xin ngay tuần 0, thử nhiều faucet, nhiều thành viên cùng xin rồi chuyển cho ví deployer | Hỏi giảng viên dùng testnet khác |

@@ -4,6 +4,38 @@
 > Nguồn yêu cầu: [`README.md`](../README.md) (yêu cầu riêng của đề) và [`rubric.md`](../rubric.md) (rubric chung). Mỗi tiêu chí phải đạt **cả hai**.
 > Thay đổi so với v0.1: xem [mục 15](#15-lịch-sử-thay-đổi).
 
+## Tóm tắt dễ hiểu
+
+**Bài toán.** Trên sàn tập trung, người dùng phải gửi tiền cho sàn giữ hộ. Nếu sàn gian lận, bị hack hay phá sản thì người dùng mất tiền. Đây là "rủi ro đối tác". Nhóm xây một sàn đổi token **phi tập trung**, trong đó không ai giữ hộ tiền của ai.
+
+**Cách sàn hoạt động.** Thay cho sổ lệnh mua bán, sàn có một "bể" chứa hai loại token A và B.
+
+- **Người góp vốn** bỏ cả hai loại token vào bể và nhận một "giấy chứng nhận góp vốn" (LP token).
+- **Người giao dịch** bỏ A vào bể và lấy B ra. Giá do một công thức cố định tự tính: bể càng ít B thì B càng đắt.
+- Mỗi lượt đổi trả một khoản phí nhỏ (0,3%). Phí ở lại trong bể, nên giấy chứng nhận của người góp vốn ngày càng có giá trị hơn.
+- Mọi luật lệ nằm trong **hợp đồng thông minh** trên blockchain. Không ai sửa được luật hay rút tiền của người khác. Người dùng tự ký mọi giao dịch bằng ví MetaMask của mình.
+
+**Các phần của hệ thống:**
+
+| Phần | Vai trò |
+|---|---|
+| Hợp đồng thông minh | "Bộ luật" của sàn: bể thanh khoản, đổi token, góp và rút vốn, thưởng cho người gửi giấy chứng nhận (staking), bỏ phiếu đổi mức phí (governance), phân quyền |
+| Website | Nơi người dùng đổi token, góp vốn, xem thống kê của bể, bỏ phiếu |
+| Máy chủ phụ trợ | Tự lập "phiếu giao dịch" cho các giao dịch lớn, mã hóa phiếu, cấp quyền xem phiếu |
+| IPFS (kho lưu trữ phi tập trung) | Lưu danh sách token và logo, phiếu giao dịch đã mã hóa, tài liệu đề xuất đổi phí |
+
+**Những điểm làm nên giá trị của sản phẩm:**
+
+- Người dùng luôn giữ quyền kiểm soát tiền của mình.
+- Giá minh bạch, tính bằng công thức ai cũng kiểm chứng được.
+- Người góp vốn được trả phí tự động.
+- Cộng đồng biểu quyết mức phí, và mức phí bị giới hạn trần.
+- Chỉ người có quyền mới xem được phiếu giao dịch.
+
+**Phạm vi.** Một bể duy nhất cho cặp TokenA/TokenB. Chạy trên máy của nhóm để demo, có bản triển khai trên mạng thử nghiệm Sepolia làm minh chứng. Không dùng tiền thật.
+
+Phần còn lại của tài liệu là thiết kế kỹ thuật chi tiết.
+
 ## 1. Quyết định đã chốt
 
 | # | Hạng mục | Chốt | Lý do ngắn |
