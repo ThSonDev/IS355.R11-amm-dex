@@ -36,7 +36,7 @@ interface IDEXRegistry {
 
     /// @notice Attach a receipt CID to a transaction; RECEIPT_ISSUER_ROLE only.
     function attachReceipt(bytes32 txHash, address trader, string calldata cid) external;
-    /// @notice Receipt of a transaction.
+    /// @notice Receipt of a transaction; an unknown txHash returns an empty struct (cid == ""), not a revert.
     function getReceipt(bytes32 txHash) external view returns (Receipt memory);
     /// @notice Transaction hashes of a trader's receipts.
     function receiptsOf(address trader) external view returns (bytes32[] memory);

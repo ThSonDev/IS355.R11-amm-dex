@@ -12,8 +12,22 @@ interface IStakingRewards {
     /// @notice New reward period started.
     event RewardAdded(uint256 reward, uint256 duration);
 
+    /// @notice Stake/withdraw of 0, or reward or duration of 0.
+    error ZeroAmount();
+    /// @notice Withdraw is more than the staked amount.
+    error InsufficientStake();
+    /// @notice notifyRewardAmount called before the current period ended.
+    error RewardPeriodActive(uint256 periodFinish);
+    /// @notice Contract does not hold enough reward token for rewardRate * duration.
+    error InsufficientRewardBalance();
+
     /// @notice Role allowed to call notifyRewardAmount.
     function REWARD_DISTRIBUTOR_ROLE() external view returns (bytes32);
+
+    /// @notice LP token being staked (AMMPair).
+    function stakingToken() external view returns (address);
+    /// @notice Reward token (DEX).
+    function rewardToken() external view returns (address);
 
     /// @notice Stake LP (approve first).
     function stake(uint256 amount) external;

@@ -23,6 +23,20 @@ interface IAMMPair {
 
     /// @notice Pool is empty or the requested output is not below the reserve.
     error InsufficientLiquidity();
+    /// @notice Swap with both amounts out zero, or both non-zero.
+    error InvalidOutputAmounts();
+    /// @notice Swap recipient is token0 or token1.
+    error InvalidTo();
+    /// @notice Swap without any token sent in.
+    error InsufficientInputAmount();
+    /// @notice Swap fails the fee-adjusted k check.
+    error KInvariant();
+    /// @notice Mint would give zero LP.
+    error InsufficientLiquidityMinted();
+    /// @notice Burn would return zero tokens.
+    error InsufficientLiquidityBurned();
+    /// @notice New fee is above MAX_FEE_BPS.
+    error FeeTooHigh(uint16 newFeeBps);
 
     /// @notice Role allowed to call setFee.
     function FEE_SETTER_ROLE() external view returns (bytes32);
