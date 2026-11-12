@@ -15,7 +15,7 @@
 - **Mục tiêu:** backend chạy được, nói chuyện được với Kubo; kiểm chứng CID giữa Kubo và Pinata.
 - **Input:** ARCHITECTURE mục 6.
 - **Hướng dẫn logic:**
-  1. Tạo dự án FastAPI với cấu trúc thư mục: `app/` (api, listener, crypto, ipfs, chain), `scripts/`, `tests/`.
+  1. Tạo dự án FastAPI với cấu trúc thư mục: `app/` (api, listener, crypto, ipfs, chain), `scripts/`, `tests/`. Dùng `.venv` ở gốc repo, thư viện ghim phiên bản trong `requirements.txt` ở gốc repo (xem SETUP mục 3).
   2. Đọc cấu hình từ `.env`: RPC URL, đường dẫn deployments, URL Kubo, các khóa (để trống).
   3. `GET /health`: kiểm tra kết nối RPC (lấy block number), kết nối Kubo (lấy version), trả JSON trạng thái.
   4. Module IPFS:
