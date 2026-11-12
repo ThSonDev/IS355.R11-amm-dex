@@ -124,6 +124,27 @@ pip install -r requirements.txt      # có từ BE-01
 - `scripts/chain.sh`: mine block, tua thời gian (dùng khi test governance, staking).
 - Dấu hiệu chạy đúng: mở `http://localhost:5173`, kết nối ví Trader, thấy reserve pool 10.000 / 10.000.
 
+### `deployments/<chain>.json`
+
+Nguồn duy nhất của địa chỉ và ABI; frontend và backend chỉ đọc file này, không chép tay.
+
+```json
+{
+  "chainId": 31337,
+  "deployBlock": 1,
+  "commit": "<git hash lúc deploy>",
+  "contracts": { "TokenA": { "address": "0x...", "abi": [ ... ] } },
+  "accounts": { "Admin": "0x...", "LP": "0x..." }
+}
+```
+
+- `contracts` có đủ 9 nhãn: `TokenA`, `TokenB`, `AMMPair`, `AMMRouter`, `DEXToken`, `StakingRewards`, `DEXGovernor`, `Timelock`, `DEXRegistry`.
+- `accounts` (Admin, LP, Trader, Community, Auditor, Backend) chỉ có ở Anvil; Sepolia để `{}`.
+- `deployments/example.json` là file mẫu với địa chỉ giả (ABI của 5 contract riêng lấy từ interface nên chỉ có hàm khai báo trong interface, thiếu hàm ERC20/AccessControl kế thừa). Dùng để code trước khi có deploy thật.
+- `deployments/anvil.json` được sinh lại trên từng máy, không commit. `sepolia.json` sẽ được commit.
+- Sinh file thật (sau khi `Deploy.s.sol` chạy): `python3 scripts/export-deployments.py --chain anvil` (hoặc `sepolia`). Script đọc `deployments/<chainId>.addresses.json` (do `Deploy.s.sol` ghi), ABI trong `contracts/out/` và block deploy trong `contracts/broadcast/`.
+- Kiểm tra một file: `python3 scripts/export-deployments.py --check deployments/example.json`.
+
 ## 7. Theo vai trò
 
 | Người | Thường chạy |
