@@ -13,14 +13,14 @@
 
 - **Hạn:** T6 13/11 · **Ước lượng:** 0.5 ngày · **Phụ thuộc:** DV-01 (repo đã dựng)
 - **Mục tiêu:** ai cũng chạy được mọi phần của dự án, không chỉ phần của mình.
-- **Input:** README cài đặt do Sơn viết (DV-01).
+- **Input:** [`docs/SETUP.md`](../SETUP.md) do Sơn viết (DV-01). Máy Windows dùng WSL2.
 - **Hướng dẫn logic:**
   1. Cài Git, Foundry (`foundryup`), Node.js LTS theo `.nvmrc`, Python theo `.python-version`, Kubo (IPFS).
   2. Tạo profile trình duyệt riêng và cài MetaMask. Import 6 tài khoản Anvil mặc định, đặt tên theo vai trò ở ARCHITECTURE 4.8.
   3. Thêm mạng Anvil vào MetaMask: RPC `http://127.0.0.1:8545`, chainId 31337.
   4. Clone repo, chạy `forge build`, `npm install`, cài thư viện Python.
-- **Output:** ảnh chụp kết quả lệnh kiểm tra phiên bản gửi vào nhóm.
-- **Done khi:** chạy được `forge --version`, `node -v`, `python --version`, `ipfs version`; MetaMask thấy 6 ví Anvil.
+- **Output:** ảnh chụp kết quả `scripts/doctor.sh` gửi vào nhóm.
+- **Done khi:** `scripts/doctor.sh` báo đủ; MetaMask thấy 6 ví Anvil. Bước nào trong SETUP sai thì sửa luôn bằng PR.
 - **Bẫy:** Foundry cần thêm `~/.foundry/bin` vào PATH và mở lại terminal; đừng dùng ví cá nhân.
 
 #### ALL-02 · Bài tập toán AMM · [#5](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/5)

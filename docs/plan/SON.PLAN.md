@@ -22,8 +22,8 @@
   5. Tạo template PR (checklist DoD) và template issue (các trường của task ở A4).
   6. Tạo các nhãn: `sc`, `fe`, `be`, `dv`, `qa`, `doc`, `interface-change`, `blocked`, `bug`, `bonus`.
   7. Tạo GitHub Project (cột: Backlog, Todo, In Progress, In Review, Done) và milestone M0, M1, M2, M3.
-  8. Viết phần "Cài đặt và chạy" trong README.
-- **Output:** repo có khung; README có hướng dẫn cài.
+  8. Viết `docs/SETUP.md` (khung đã có) phần công cụ, clone, `.env`; thêm `scripts/doctor.sh` kiểm tra phiên bản và cổng.
+- **Output:** repo có khung; `docs/SETUP.md` có hướng dẫn cài; `scripts/doctor.sh`.
 - **Done khi:** một thành viên khác clone và chạy `forge build` thành công.
 
 #### SC-01 · Viết interface contract và chốt · [#8](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/8)
@@ -49,7 +49,7 @@
   1. Chốt cấu trúc file: `chainId`, `deployBlock`, `commit` (git hash), `contracts` (tên → `{address, abi}`), `accounts` (vai trò → địa chỉ, chỉ với Anvil).
   2. Viết script đọc ABI trong `out/` và địa chỉ từ kết quả `forge script` (file broadcast), rồi ghi ra file trên.
   3. Tạm thời làm một file mẫu (`deployments/example.json`) với địa chỉ giả để frontend và backend code trước.
-- **Output:** `scripts/export-deployments.*`, `deployments/example.json`, mô tả định dạng trong README.
+- **Output:** `scripts/export-deployments.*`, `deployments/example.json`, mô tả định dạng trong `docs/SETUP.md`.
 - **Done khi:** Nhàn và Quyền load được file mẫu trong code của họ.
 
 #### DV-03 · Xin Sepolia ETH · [#11](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/11)
@@ -287,6 +287,6 @@
 #### DV-30 · Đóng gói nộp · [#65](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/65)
 
 - **Hạn:** CN 06/12.
-- README hướng dẫn chạy từ đầu, có danh sách phiên bản công cụ.
+- `docs/SETUP.md` hướng dẫn chạy từ đầu, có danh sách phiên bản công cụ.
 - Tag `v1.0`; xuất PDF báo cáo; slide; video; file link Sepolia.
 - Kiểm tra repo không có secret (tìm theo chuỗi khóa và `.env`).
