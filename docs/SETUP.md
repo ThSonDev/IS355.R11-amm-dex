@@ -37,7 +37,7 @@ Phiên bản lấy theo file ghim trong repo, không tự chọn bản khác.
 Phiên bản đang ghim: Foundry 1.9.0 (solc 0.8.30), Node 24, Python 3.12, Kubo v0.43.1.
 
 ```bash
-# Git, Python 3.12 (Ubuntu 24.04 có sẵn 3.12; bản khác thì dùng pyenv)
+# Git, Python 3.12 (Ubuntu 24.04 có sẵn 3.12). Không dùng pyenv global; thư viện chỉ cài trong .venv của repo
 sudo apt update && sudo apt install -y git curl python3 python3-venv
 
 # Foundry (forge, anvil, cast): cài foundryup rồi chạy; mở terminal mới sau đó
@@ -70,7 +70,15 @@ cd contracts && forge build
 
 Lỡ clone thiếu `--recurse-submodules` (thư mục `contracts/lib/` rỗng): chạy `git submodule update --init --recursive`. OpenZeppelin v5.7.0 và forge-std v1.17.0 là submodule đã ghim; không chạy `forge update`.
 *(chờ FE-01)* Cài thư viện frontend.
-*(chờ BE-01)* Môi trường ảo Python, cài thư viện backend, `ipfs init`.
+Python: một môi trường ảo `.venv` ở gốc repo (đã nằm trong `.gitignore`), thư viện ghi trong `requirements.txt` ở gốc repo. Không `pip install` ra ngoài `.venv`.
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate            # mỗi terminal mới đều cần chạy lại
+pip install -r requirements.txt      # có từ BE-01
+```
+
+*(chờ BE-01)* `ipfs init` và chạy backend.
 
 ## 4. Cấu hình `.env`
 

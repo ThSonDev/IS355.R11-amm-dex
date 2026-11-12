@@ -544,6 +544,7 @@ Bí mật trong `.env` (không commit): `RECEIPT_ISSUER_PRIVATE_KEY`, `SERVER_MA
 contracts/      Foundry: src/ test/ script/ (Deploy.s.sol, Seed.s.sol)
 frontend/       Vite + React + wagmi
 backend/        FastAPI app, listener, crypto, ipfs, audit_cli, scripts/
+requirements.txt  thư viện Python (cài vào .venv ở gốc repo)
 deployments/    địa chỉ + ABI + block deploy theo chain (anvil.json, sepolia.json)
 docs/           ARCHITECTURE.md, demo-script.md, report assets
 scripts/dev.sh  khởi động toàn bộ môi trường local
