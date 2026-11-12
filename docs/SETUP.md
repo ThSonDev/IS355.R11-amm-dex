@@ -32,15 +32,43 @@ Phiên bản lấy theo file ghim trong repo, không tự chọn bản khác.
 | Foundry (forge, anvil, cast) | `contracts/foundry.toml` (solc) | `forge --version` |
 | Node.js | `.nvmrc` | `node -v` |
 | Python | `.python-version` | `python3 --version` |
-| Kubo | ghi ở bảng này | `ipfs version` |
+| Kubo | **v0.43.1** (ghi ở bảng này) | `ipfs version` |
 
-*(chờ DV-01)* Lệnh cài từng công cụ.
+Phiên bản đang ghim: Foundry 1.9.0 (solc 0.8.30), Node 24, Python 3.12, Kubo v0.43.1.
+
+```bash
+# Git, Python 3.12 (Ubuntu 24.04 có sẵn 3.12; bản khác thì dùng pyenv)
+sudo apt update && sudo apt install -y git curl python3 python3-venv
+
+# Foundry (forge, anvil, cast): cài foundryup rồi chạy; mở terminal mới sau đó
+curl -L https://foundry.paradigm.xyz | bash
+foundryup --install 1.9.0
+
+# Node.js qua nvm (đọc phiên bản từ .nvmrc, chạy trong thư mục repo sau khi clone)
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.41.0/install.sh | bash
+# mở terminal mới, rồi:
+nvm install && nvm use
+
+# Kubo (IPFS) v0.43.1
+cd /tmp
+curl -LO https://github.com/ipfs/kubo/releases/download/v0.43.1/kubo_v0.43.1_linux-amd64.tar.gz
+tar xzf kubo_v0.43.1_linux-amd64.tar.gz
+sudo bash kubo/install.sh
+```
+
+Nguồn chính thức: [Foundry](https://github.com/foundry-rs/foundry/releases), [Node.js](https://nodejs.org/en/download), [Kubo](https://github.com/ipfs/kubo/releases), [nvm](https://github.com/nvm-sh/nvm). CPU ARM thì thay `linux-amd64` bằng `linux-arm64`.
 
 Chạy kiểm tra tổng: `scripts/doctor.sh` báo công cụ nào thiếu, sai phiên bản, cổng nào đang bị chiếm.
 
 ## 3. Clone và cài thư viện
 
-*(chờ DV-01)* Clone, `forge build`.
+```bash
+git clone --recurse-submodules https://github.com/ThSonDev/IS355.R11-amm-dex.git
+cd IS355.R11-amm-dex
+cd contracts && forge build
+```
+
+Lỡ clone thiếu `--recurse-submodules` (thư mục `contracts/lib/` rỗng): chạy `git submodule update --init --recursive`. OpenZeppelin v5.7.0 và forge-std v1.17.0 là submodule đã ghim; không chạy `forge update`.
 *(chờ FE-01)* Cài thư viện frontend.
 *(chờ BE-01)* Môi trường ảo Python, cài thư viện backend, `ipfs init`.
 
@@ -50,7 +78,17 @@ Chạy kiểm tra tổng: `scripts/doctor.sh` báo công cụ nào thiếu, sai 
 - Private key của Anvil là key công khai, ai cũng biết, chỉ dùng cho local.
 - Key ví Sepolia chỉ Lead giữ. Không dán key vào chat nhóm hay công cụ AI.
 
-*(chờ DV-01, BE-01)* Giải thích từng biến.
+| Biến | Ý nghĩa |
+|---|---|
+| `RPC_URL`, `CHAIN_ID` | Anvil local: `http://127.0.0.1:8545`, `31337` |
+| `IPFS_API`, `IPFS_GATEWAY` | Kubo local: `:5001` (API), `:8080` (gateway) |
+| `RECEIPT_ISSUER_PRIVATE_KEY` | Backend ký biên lai; local dùng key tài khoản #5 của Anvil |
+| `SERVER_MASTER_KEY` | Khóa gốc sinh khóa AES cho biên lai (64 ký tự hex); lộ khóa này là lộ mọi biên lai |
+| `AUDITOR_PUBLIC_KEY_PATH` | Đường dẫn khóa công khai RSA của Auditor |
+| `PINATA_JWT` | Tùy chọn, ghim bản sao dự phòng lên Pinata |
+| `SEPOLIA_RPC_URL`, `DEPLOYER_PRIVATE_KEY`, `ETHERSCAN_API_KEY` | Chỉ Lead, dùng khi deploy Sepolia (mục 8) |
+
+*(chờ BE-01)* Cách sinh khóa RSA cho Auditor.
 
 ## 5. MetaMask
 
