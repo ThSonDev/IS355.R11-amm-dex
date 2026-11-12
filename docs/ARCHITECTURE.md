@@ -1,6 +1,6 @@
 # Kiến trúc hệ thống - AMM DEX
 
-> Trạng thái: **Draft v0.2** (2026-11-12). Interface ở mục 4 cần chốt trước **2026-11-15** để các nhánh làm song song.
+> Trạng thái: **Draft v0.3** (2026-11-12). Interface ở mục 4 cần chốt trước **2026-11-15** để các nhánh làm song song.
 > Nguồn yêu cầu: [`README.md`](../README.md) (yêu cầu riêng của đề) và [`rubric.md`](../rubric.md) (rubric chung). Mỗi tiêu chí phải đạt **cả hai**.
 > Thay đổi so với v0.1: xem [mục 15](#15-lịch-sử-thay-đổi).
 
@@ -181,14 +181,23 @@ event Swap(address indexed sender, uint256 amount0In, uint256 amount1In,
            uint256 amount0Out, uint256 amount1Out, address indexed to);
 event Sync(uint256 reserve0, uint256 reserve1);
 event FeeUpdated(uint16 oldFeeBps, uint16 newFeeBps);
+
+error InvalidOutputAmounts();          // swap: cả hai amountOut = 0, hoặc cả hai > 0
+error InsufficientLiquidity();         // pool rỗng hoặc amountOut >= reserve
+error InvalidTo();                     // to là token0 hoặc token1
+error InsufficientInputAmount();       // không có token vào
+error KInvariant();                    // không qua k-check (có tính phí)
+error InsufficientLiquidityMinted();   // mint ra 0 LP
+error InsufficientLiquidityBurned();   // burn ra 0 token
+error FeeTooHigh(uint16 newFeeBps);    // setFee vượt MAX_FEE_BPS
 ```
 
 **Ràng buộc trong `swap`:**
 
-- Có đúng một chiều ra, với `amountOut > 0`.
-- **`amount0Out < r0 && amount1Out < r1`** (kiểm tra thanh khoản).
-- `to` khác token0/token1.
-- Có token vào (mục 3) và qua được k-check.
+- Có đúng một chiều ra, với `amountOut > 0` (`InvalidOutputAmounts()`).
+- **`amount0Out < r0 && amount1Out < r1`** (kiểm tra thanh khoản, `InsufficientLiquidity()`).
+- `to` khác token0/token1 (`InvalidTo()`).
+- Có token vào (mục 3, `InsufficientInputAmount()`) và qua được k-check (`KInvariant()`).
 
 Sau mỗi swap: `feeAccrued += amountIn * feeBps / 10000`, cập nhật reserve, emit `Sync`.
 
@@ -219,6 +228,7 @@ function quote(uint256 amountA, uint256 reserveA, uint256 reserveB) external pur
 event SwapExecuted(address indexed trader, address indexed tokenIn, address tokenOut,
     uint256 amountIn, uint256 amountOut, uint256 feeAmount,
     uint256 reserveInBefore, uint256 reserveOutBefore, address to);
+    // feeAmount tính bằng tokenIn: amountIn * feeBps / 10000
 ```
 
 `SwapExecuted` chứa đủ dữ liệu cho backend (trader = `msg.sender`, reserve trước swap để xét "giao dịch lớn") và trang History, không cần đọc state lịch sử.
@@ -267,12 +277,19 @@ function rewardRate() external view returns (uint256);   // DEX / giây
 function periodFinish() external view returns (uint256);
 function totalSupply() external view returns (uint256);  // tổng LP đang stake
 function balanceOf(address account) external view returns (uint256);
+function stakingToken() external view returns (address);
+function rewardToken() external view returns (address);
 function notifyRewardAmount(uint256 reward, uint256 duration) external onlyRole(REWARD_DISTRIBUTOR_ROLE);
 
 event Staked(address indexed user, uint256 amount);
 event Withdrawn(address indexed user, uint256 amount);
 event RewardPaid(address indexed user, uint256 reward);
 event RewardAdded(uint256 reward, uint256 duration);
+
+error ZeroAmount();                              // stake/withdraw 0, hoặc reward/duration = 0
+error InsufficientStake();                       // withdraw nhiều hơn đang stake
+error RewardPeriodActive(uint256 periodFinish);  // notify khi kỳ cũ chưa kết thúc
+error InsufficientRewardBalance();               // không giữ đủ DEX cho rewardRate * duration
 ```
 
 **Ràng buộc của `notifyRewardAmount`:**
@@ -343,6 +360,7 @@ event ReceiptAttached(bytes32 indexed txHash, address indexed trader, string cid
 ```
 
 Ràng buộc: `attachReceipt` không ghi đè biên lai đã có (`ReceiptExists()`); `cid` không rỗng (`EmptyCID()`).
+`getReceipt` của `txHash` chưa có biên lai trả struct rỗng (`cid == ""`), không revert; frontend coi `cid` rỗng là "chưa có biên lai".
 
 ### 4.8 Ai giữ quyền gì
 
@@ -640,6 +658,12 @@ Khi chạy `--fresh`, xóa state Anvil và nhắc reset tài khoản MetaMask ("
 - [ ] Xin Sepolia ETH cho ví deployer và ví backend.
 
 ## 15. Lịch sử thay đổi
+
+**v0.3 (2026-11-12)**, khi viết interface (SC-01):
+
+- Đặt tên custom error còn thiếu cho `AMMPair` (4.2) và `StakingRewards` (4.5).
+- Thêm getter `stakingToken()`, `rewardToken()` cho `StakingRewards`.
+- Ghi rõ đơn vị `SwapExecuted.feeAmount` (tokenIn) và cách `getReceipt` báo chưa có biên lai.
 
 **v0.2 (2026-11-12)**, sau phản biện độc lập:
 
