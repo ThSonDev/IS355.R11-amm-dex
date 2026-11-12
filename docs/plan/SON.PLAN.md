@@ -175,8 +175,9 @@
 - **Hướng dẫn logic:**
   1. `Deploy.s.sol` (bản v1): deploy TokenA, TokenB, Pair, Router.
      - Tạm thời admin của Pair là ví #0; tuần 2 đổi sang Timelock.
+     - Cuối script ghi `deployments/<chainId>.addresses.json` (tên → địa chỉ, dùng `vm.serializeAddress` + `vm.writeJson`), tên đúng bộ cố định trong `scripts/export-deployments.py` (TokenA, TokenB, AMMPair, AMMRouter, ...). Bản v1 chỉ có 4 tên đầu.
   2. `Seed.s.sol` (bản v1): mint TKA/TKB cho các ví #1-#3, ví LP nạp 10.000/10.000.
-  3. Chạy script export ra `deployments/anvil.json`.
+  3. Chạy `scripts/export-deployments.py --chain anvil` ra `deployments/anvil.json` (định dạng ở SETUP mục 6).
   4. `scripts/dev.sh` v1: khởi động Anvil (`--block-time 2`, `--state`), deploy + seed nếu chưa có, export.
 - **Output:** script và `deployments/anvil.json`.
 - **Done khi:** Nhàn chạy `dev.sh` trên máy mình và thấy pool có reserve trên giao diện.
