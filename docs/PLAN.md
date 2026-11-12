@@ -160,6 +160,7 @@ Số task: `0x` là tuần 0, `1x` là tuần 1, v.v.
 - `main` được bảo vệ: không push thẳng, phải qua PR có ít nhất 1 approve, CI xanh (khi có CI).
 - Nhánh làm việc đặt tên `<nhóm>/<mã-task>-<mô-tả-ngắn>`, ví dụ `sc/SC-10-amm-pair`, `fe/FE-11-swap-page`.
 - Mỗi task một nhánh, một PR. PR nhỏ (dưới ~400 dòng thay đổi nếu có thể). Task lớn thì chia nhiều PR.
+- PR hoàn thành một task: tiêu đề bắt đầu bằng mã task, ví dụ `[SC-10] AMMPair core`, nội dung có `Closes #16` để issue tự đóng khi merge. PR chỉ làm một phần task: ghi `Refs #16`, không dùng `Closes`.
 
 **Commit:**
 

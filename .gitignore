@@ -4,3 +4,13 @@ tmp/
 CLAUDE.md
 .claude/
 scripts/github/
+
+# build output and local state
+contracts/out/
+contracts/cache/
+contracts/broadcast/*/31337/
+node_modules/
+.env
+.anvil/
+__pycache__/
+.venv/
