@@ -3,27 +3,35 @@
 
   export-deployments.py --chain anvil|sepolia     real export after Deploy.s.sol
   export-deployments.py --example                 fake addresses -> deployments/example.json
-  export-deployments.py --check FILE              validate a deployments file
+                                                  (runs forge build itself; needs only a fresh clone)
+  export-deployments.py --check FILE [--require-all]   validate a deployments file
 Inputs (real export): deployments/<chainId>.addresses.json (LABEL -> address, written by
 Deploy.s.sol), contracts/out/ (ABIs), contracts/broadcast/Deploy.s.sol/<chainId>/run-latest.json.
 """
-import argparse, json, re, subprocess, sys
+import argparse, json, os, re, subprocess, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 CHAINS = {"anvil": 31337, "sepolia": 11155111}
-# label -> (implementation artifact, interface artifact used by --example/--interfaces)
+# label -> (implementation artifact for the real export, artifacts merged for --example/--interfaces).
+# Interface mode merges OZ interfaces so inherited ERC20/AccessControl/Governor functions are present.
 ARTIFACTS = {
-    "TokenA": ("TestToken", "ITestToken"),
-    "TokenB": ("TestToken", "ITestToken"),
-    "AMMPair": ("AMMPair", "IAMMPair"),
-    "AMMRouter": ("AMMRouter", "IAMMRouter"),
-    "DEXToken": ("DEXToken", "DEXToken"),
-    "StakingRewards": ("StakingRewards", "IStakingRewards"),
-    "DEXGovernor": ("DEXGovernor", "DEXGovernor"),
-    "Timelock": ("TimelockController", "TimelockController"),
-    "DEXRegistry": ("DEXRegistry", "IDEXRegistry"),
+    "TokenA": ("TestToken", ["ITestToken", "IERC20Metadata"]),
+    "TokenB": ("TestToken", ["ITestToken", "IERC20Metadata"]),
+    "AMMPair": ("AMMPair", ["IAMMPair", "IERC20Metadata", "IAccessControl"]),
+    "AMMRouter": ("AMMRouter", ["IAMMRouter"]),
+    "DEXToken": ("DEXToken", ["IERC20Metadata", "IERC20Permit", "IERC5805"]),
+    "StakingRewards": ("StakingRewards", ["IStakingRewards", "IAccessControl"]),
+    "DEXGovernor": ("DEXGovernor", ["IGovernor"]),
+    "Timelock": ("TimelockController", ["TimelockController"]),
+    "DEXRegistry": ("DEXRegistry", ["IDEXRegistry", "IAccessControl"]),
 }
+# OZ sources compiled by path for interface mode (our own src/ is built too)
+OZ = "lib/openzeppelin-contracts/contracts/"
+OZ_PATHS = [OZ + p for p in (
+    "token/ERC20/extensions/IERC20Metadata.sol", "token/ERC20/extensions/IERC20Permit.sol",
+    "interfaces/IERC5805.sol", "access/IAccessControl.sol", "governance/IGovernor.sol",
+    "governance/TimelockController.sol")]
 # Default Anvil accounts #0-#5 (from `anvil` output; ARCHITECTURE 4.8 roles)
 ANVIL_ACCOUNTS = {
     "Admin": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
@@ -53,22 +61,49 @@ def abi_of(name):
     return json.loads(hits[0].read_text())["abi"]
 
 
+def merged_abi(names):
+    """Concatenate ABIs, de-duplicated by (type, name, input types)."""
+    seen, out = set(), []
+    for n in names:
+        for e in abi_of(n):
+            key = (e["type"], e.get("name"), tuple(i["type"] for i in e.get("inputs", [])))
+            if key not in seen:
+                seen.add(key)
+                out.append(e)
+    return out
+
+
+def build_oz():
+    try:
+        subprocess.run(["forge", "build", "src", *OZ_PATHS], cwd=ROOT / "contracts", check=True, stdout=subprocess.DEVNULL,
+                       env={**os.environ, "PATH": os.environ["PATH"] + ":" + str(Path.home() / ".foundry/bin")})
+    except (OSError, subprocess.CalledProcessError) as e:
+        fail(f"forge build failed ({e}); see docs/SETUP.md section 2")
+
+
 def build(chain_id, addresses, deploy_block, commit, accounts, use_interfaces):
-    missing = [l for l in ARTIFACTS if l not in addresses]
-    if missing:
-        fail(f"addresses file lacks labels: {', '.join(missing)}")
-    contracts = {l: {"address": addresses[l], "abi": abi_of(ARTIFACTS[l][1 if use_interfaces else 0])} for l in ARTIFACTS}
+    unknown = [l for l in addresses if l not in ARTIFACTS]
+    bad = [l for l, a in addresses.items() if not ADDR.match(str(a))]
+    if unknown or bad:
+        fail(f"addresses file: unknown labels {unknown}, malformed addresses {bad}")
+    for l in ARTIFACTS:
+        if l not in addresses:
+            print(f"warning: no address for {l}, left out", file=sys.stderr)
+    contracts = {l: {"address": a, "abi": merged_abi(ARTIFACTS[l][1]) if use_interfaces else abi_of(ARTIFACTS[l][0])}
+                 for l, a in addresses.items()}
     return {"chainId": chain_id, "deployBlock": deploy_block, "commit": commit, "contracts": contracts, "accounts": accounts}
 
 
-def check(path):
+def check(path, require_all):
     d = load(Path(path), "file to check")
     errs = []
     for k in ("chainId", "deployBlock", "commit", "contracts", "accounts"):
         if k not in d:
             errs.append(f"missing field {k}")
-    for l in ARTIFACTS:
-        c = d.get("contracts", {}).get(l)
+    present = d.get("contracts", {})
+    errs += [f"unknown contract {l}" for l in present if l not in ARTIFACTS]
+    for l in (ARTIFACTS if require_all else present):
+        c = present.get(l)
         if not c:
             errs.append(f"missing contract {l}")
             continue
@@ -88,15 +123,17 @@ def main():
     g.add_argument("--chain", choices=CHAINS)
     g.add_argument("--example", action="store_true")
     g.add_argument("--check", metavar="FILE")
+    ap.add_argument("--require-all", action="store_true", help="with --check: all 9 labels must be present")
     ap.add_argument("--interfaces", action="store_true", help="take ABIs from interfaces (implies incomplete ABIs)")
     a = ap.parse_args()
 
     if a.check:
-        errs = check(a.check)
+        errs = check(a.check, a.require_all)
         print("\n".join(errs) if errs else f"OK {a.check}")
         sys.exit(1 if errs else 0)
 
     if a.example:
+        build_oz()
         addrs = {l: "0x" + f"{i:040x}" for i, l in enumerate(ARTIFACTS, 1)}
         out = ROOT / "deployments/example.json"
         data = build(31337, addrs, 1, "0" * 40, ANVIL_ACCOUNTS, True)
@@ -108,6 +145,8 @@ def main():
         if not blocks:
             fail("run-latest.json has no receipts")
         commit = subprocess.check_output(["git", "-C", str(ROOT), "rev-parse", "HEAD"], text=True).strip()
+        if a.interfaces:
+            build_oz()
         out = ROOT / f"deployments/{a.chain}.json"
         data = build(cid, addrs, min(blocks), commit, ANVIL_ACCOUNTS if a.chain == "anvil" else {}, a.interfaces)
     out.write_text(json.dumps(data, indent=2) + "\n")

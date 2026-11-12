@@ -140,10 +140,11 @@ Nguồn duy nhất của địa chỉ và ABI; frontend và backend chỉ đọc
 
 - `contracts` có đủ 9 nhãn: `TokenA`, `TokenB`, `AMMPair`, `AMMRouter`, `DEXToken`, `StakingRewards`, `DEXGovernor`, `Timelock`, `DEXRegistry`.
 - `accounts` (Admin, LP, Trader, Community, Auditor, Backend) chỉ có ở Anvil; Sepolia để `{}`.
-- `deployments/example.json` là file mẫu với địa chỉ giả (ABI của 5 contract riêng lấy từ interface nên chỉ có hàm khai báo trong interface, thiếu hàm ERC20/AccessControl kế thừa). Dùng để code trước khi có deploy thật.
+- `deployments/example.json` là file mẫu với địa chỉ giả (ABI lấy từ interface của dự án gộp với interface OpenZeppelin, nên có cả hàm ERC20/AccessControl/Governor kế thừa). Dùng để code trước khi có deploy thật.
 - `deployments/anvil.json` được sinh lại trên từng máy, không commit. `sepolia.json` sẽ được commit.
-- Sinh file thật (sau khi `Deploy.s.sol` chạy): `python3 scripts/export-deployments.py --chain anvil` (hoặc `sepolia`). Script đọc `deployments/<chainId>.addresses.json` (do `Deploy.s.sol` ghi), ABI trong `contracts/out/` và block deploy trong `contracts/broadcast/`.
-- Kiểm tra một file: `python3 scripts/export-deployments.py --check deployments/example.json`.
+- Sinh file thật (sau khi `Deploy.s.sol` chạy; nhãn thiếu trong file địa chỉ chỉ bị cảnh báo, nhãn lạ hoặc địa chỉ sai thì báo lỗi): `python3 scripts/export-deployments.py --chain anvil` (hoặc `sepolia`). Script đọc `deployments/<chainId>.addresses.json` (do `Deploy.s.sol` ghi), ABI trong `contracts/out/` và block deploy trong `contracts/broadcast/`.
+- Kiểm tra một file: `python3 scripts/export-deployments.py --check deployments/example.json --require-all` (bỏ `--require-all` thì chấp nhận thiếu nhãn, ví dụ bản deploy v1 chỉ có TokenA, TokenB, AMMPair, AMMRouter).
+- Sinh lại file mẫu từ clone mới: `python3 scripts/export-deployments.py --example` (tự chạy `forge build`).
 
 ## 7. Theo vai trò
 
