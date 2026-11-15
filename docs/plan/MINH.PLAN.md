@@ -11,7 +11,7 @@
 
 #### SC-02 · Kiểm chứng OpenZeppelin v5 · [#9](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/9)
 
-- **Hạn:** CN 15/11 · **Ước lượng:** 1 ngày · **Phụ thuộc:** DV-01
+- **Hạn:** T3 17/11 · **Ước lượng:** 1 ngày · **Phụ thuộc:** DV-01
 - **Mục tiêu:** xử lý các mục chưa chắc ở ARCHITECTURE mục 14 trước khi chốt interface.
 - **Input:** ARCHITECTURE 4.4-4.6 và mục 14.
 - **Hướng dẫn logic:**
@@ -27,7 +27,7 @@
 
 #### ALL-04 (Minh) · Học Foundry cơ bản · [#7](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/7)
 
-- **Hạn:** CN 15/11 · **Ước lượng:** 1 ngày
+- **Hạn:** T3 17/11 · **Ước lượng:** 1 ngày
 - Làm theo Foundry Book phần "Writing tests": test một ERC20 đơn giản với `vm.prank`, `vm.expectRevert`, `vm.warp`.
 - Đây là kỹ năng cần cho mọi task tuần 1.
 
@@ -42,7 +42,7 @@
 
 #### SC-13 · `TestToken` (TokenA, TokenB) · [#20](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/20)
 
-- **Hạn:** T3 17/11 · **Ước lượng:** 0.5 ngày · **Phụ thuộc:** SC-01
+- **Hạn:** T4 18/11 · **Ước lượng:** 0.5 ngày · **Phụ thuộc:** SC-01
 - **Mục tiêu:** hai token ERC-20 để giao dịch (README TC4); task khởi động cho Solidity.
 - **Hướng dẫn logic:**
   1. Kế thừa ERC20 và Ownable (truyền `initialOwner`).
@@ -52,7 +52,7 @@
 
 #### SC-14 · `DEXToken` · [#21](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/21)
 
-- **Hạn:** T4 18/11 · **Ước lượng:** 0.5 ngày · **Phụ thuộc:** SC-02
+- **Hạn:** T5 19/11 · **Ước lượng:** 0.5 ngày · **Phụ thuộc:** SC-02
 - **Mục tiêu:** token thưởng và token biểu quyết.
 - **Hướng dẫn logic:** hoàn thiện khung từ SC-02:
   - mint 1.000.000 DEX cho địa chỉ nhận trong constructor;

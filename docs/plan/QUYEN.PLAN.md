@@ -11,7 +11,7 @@
 
 #### BE-01 · Khung backend và IPFS · [#14](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/14)
 
-- **Hạn:** CN 15/11 · **Ước lượng:** 1.5 ngày · **Phụ thuộc:** DV-01
+- **Hạn:** T5 19/11 · **Ước lượng:** 1.5 ngày · **Phụ thuộc:** DV-01
 - **Mục tiêu:** backend chạy được, nói chuyện được với Kubo; kiểm chứng CID giữa Kubo và Pinata.
 - **Input:** ARCHITECTURE mục 6.
 - **Hướng dẫn logic:**
@@ -28,7 +28,7 @@
 
 #### BE-02 · Tạo cặp khóa RSA cho Auditor và quy ước khóa · [#15](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/15)
 
-- **Hạn:** CN 15/11 · **Ước lượng:** 0.5 ngày · **Phụ thuộc:** không
+- **Hạn:** T5 19/11 · **Ước lượng:** 0.5 ngày · **Phụ thuộc:** không
 - **Hướng dẫn logic:**
   1. Viết script sinh cặp RSA 3072-bit. Private key ở dạng **PKCS#8 PEM** (Web Crypto chỉ nhận dạng này); public key dạng SPKI PEM.
   2. Quy ước nơi lưu:
@@ -49,7 +49,7 @@
 
 #### BE-10 · Module crypto · [#27](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/27)
 
-- **Hạn:** T4 18/11 · **Ước lượng:** 1 ngày · **Phụ thuộc:** BE-02
+- **Hạn:** T6 20/11 · **Ước lượng:** 1 ngày · **Phụ thuộc:** BE-02
 - **Mục tiêu:** mã hóa biên lai theo ARCHITECTURE 5.1 (rubric TC2).
 - **Hướng dẫn logic:**
   1. **Dựng khóa:** HKDF-SHA256 với input là master key, salt là txHash (32 byte), info là chuỗi "receipt-v1", đầu ra 32 byte. Cùng txHash luôn ra cùng khóa.
@@ -66,7 +66,7 @@
 
 #### BE-11 · Thử nghiệm interop: Python mã hóa, trình duyệt giải mã · [#28](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/28)
 
-- **Hạn:** T6 20/11 · **Ước lượng:** 1 ngày · **Phụ thuộc:** BE-10
+- **Hạn:** CN 22/11 · **Ước lượng:** 1 ngày · **Phụ thuộc:** BE-10
 - **Mục tiêu:** xử lý rủi ro R4 sớm.
 - **Hướng dẫn logic:**
   1. Python tạo một envelope mẫu và in ra K (base64).
