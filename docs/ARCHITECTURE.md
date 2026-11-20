@@ -245,6 +245,12 @@ event SwapExecuted(address indexed trader, address indexed tokenIn, address toke
 | Token hợp lệ | `swapTokens` | `InvalidToken()` nếu `tokenIn` không thuộc pair |
 
 `addLiquidity` tính lượng tối ưu theo tỷ lệ reserve hiện tại (như V2): chỉ lấy đúng tỷ lệ, phần dư không bị lấy.
+Chi tiết hành vi (chốt khi làm SC-11, giống V2):
+
+- Pool rỗng: `addLiquidity` lấy đúng `amountADesired`/`amountBDesired`, không xét `amountAMin`/`amountBMin`.
+- `getAmountOut(tokenIn, 0)` trả 0 (không revert), để frontend gọi khi ô nhập trống. `ZeroAmount()` chỉ áp cho hàm ghi.
+- `quote` revert `InsufficientLiquidity()` khi reserve bằng 0.
+- Swap có `amountOut` làm tròn về 0 thì lỗi `InvalidOutputAmounts()` từ Pair được trả nguyên.
 
 ### 4.4 `DEXToken` ("DEX" - token thưởng + quyền biểu quyết)
 
