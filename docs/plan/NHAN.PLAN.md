@@ -11,7 +11,7 @@
 
 #### FE-01 · Khung frontend và kết nối ví · [#12](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/12)
 
-- **Hạn:** CN 15/11 · **Ước lượng:** 1.5 ngày · **Phụ thuộc:** DV-01
+- **Hạn:** T3 17/11 · **Ước lượng:** 1.5 ngày · **Phụ thuộc:** DV-01
 - **Mục tiêu:** khung chạy được, kết nối MetaMask với Anvil; kiểm chứng rủi ro R6.
 - **Input:** ARCHITECTURE mục 7 (phần Ví).
 - **Hướng dẫn logic:**
@@ -26,7 +26,7 @@
 
 #### FE-02 · Wireframe 4 trang · [#13](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/13)
 
-- **Hạn:** CN 15/11 · **Ước lượng:** 1 ngày · **Phụ thuộc:** không
+- **Hạn:** T3 17/11 · **Ước lượng:** 1 ngày · **Phụ thuộc:** không
 - **Mục tiêu:** thống nhất giao diện trước khi code; ai làm trang Governance hay Receipts cũng theo cùng một kiểu.
 - **Input:** ARCHITECTURE mục 7, bảng 4 trang.
 - **Hướng dẫn logic:**
@@ -48,7 +48,7 @@
 
 #### FE-10 · Lớp cấu hình contract và hooks dùng chung · [#24](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/24)
 
-- **Hạn:** T3 17/11 · **Ước lượng:** 1 ngày · **Phụ thuộc:** DV-02, FE-01
+- **Hạn:** T4 18/11 · **Ước lượng:** 1 ngày · **Phụ thuộc:** DV-02, FE-01
 - **Mục tiêu:** cả nhóm frontend (Nhàn, Minh, Quyền) dùng chung một cách đọc/ghi contract.
 - **Hướng dẫn logic:**
   1. Đọc `deployments/<chainId>.json` theo chain đang kết nối; tạm thời đọc `example.json`.
@@ -93,7 +93,7 @@
 
 #### FE-12 · Header: ví, mạng, faucet · [#26](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/26)
 
-- **Hạn:** T4 18/11 · **Ước lượng:** 0.5 ngày · **Phụ thuộc:** FE-01, SC-13
+- **Hạn:** T5 19/11 · **Ước lượng:** 0.5 ngày · **Phụ thuộc:** FE-01, SC-13
 - **Hướng dẫn logic:**
   - Nút Faucet gọi `faucet()` của TKA hoặc TKB.
   - Nếu revert `FaucetCooldown` thì hiển thị "Thử lại sau <thời gian>".

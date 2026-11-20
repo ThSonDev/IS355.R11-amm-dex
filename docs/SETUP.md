@@ -162,7 +162,7 @@ Nguồn duy nhất của địa chỉ và ABI; frontend và backend chỉ đọc
 
 | Triệu chứng | Cách xử lý |
 |---|---|
-| `forge: command not found` sau khi cài | Mở terminal mới hoặc `source ~/.bashrc` (Foundry thêm `~/.foundry/bin` vào PATH) |
+| `forge`/`cast: command not found` sau khi cài | Mở terminal mới. Vẫn lỗi thì `foundryup` chưa tự thêm PATH: `echo 'export PATH="$HOME/.foundry/bin:$PATH"' >> ~/.zshrc` (bash: `~/.bashrc`), rồi `source` file đó |
 | MetaMask báo nonce sai, giao dịch treo | Clear activity tab data (mục 5) |
 | `address already in use` | `scripts/doctor.sh` chỉ ra cổng; tắt tiến trình cũ |
 | Kubo báo chưa có repo | `ipfs init` một lần |

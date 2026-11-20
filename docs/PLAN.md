@@ -78,8 +78,8 @@ Nhóm có khoảng 3,5 tuần để làm xong một sàn đổi token phi tập 
 
 | Ngày | Mốc | Điều kiện đạt |
 |---|---|---|
-| T5 12/11 | Kickoff | Cả nhóm đọc PLAN + ARCHITECTURE, nhận task |
-| **CN 15/11** | **M0 - Chốt interface** | Interface Solidity compile được, có ABI; môi trường của cả 4 người chạy được; tag `interface-v1` |
+| CN 15/11 | Kickoff | Cả nhóm đọc PLAN + ARCHITECTURE, nhận task (Quyền họp riêng T4 18/11) |
+| **CN 15/11** | **M0 - Chốt interface** | Interface Solidity compile được, có ABI; tag `interface-v1` (đạt 14/11). Môi trường của cả 4 người chạy được: dời T3 17/11 (Quyền T5 19/11) |
 | CN 22/11 | M1 - Lõi chạy local | Trên Anvil: add liquidity → swap → remove qua giao diện; contract Token/Staking/Registry có test pass |
 | T6 27/11 | M2a - Lên testnet | Toàn bộ contract deploy + verify trên Sepolia |
 | **CN 29/11** | **M2 - Chốt tính năng (feature freeze)** | Mọi chức năng trong ARCHITECTURE chạy end-to-end trên local; tổng duyệt lần 1 |
@@ -88,7 +88,7 @@ Nhóm có khoảng 3,5 tuần để làm xong một sàn đổi token phi tập 
 | T6 04/12 | Video xong | Có phụ đề |
 | T7 05/12 | Báo cáo + slide xong, tổng duyệt lần 3 | Tắt Wi-Fi khi tổng duyệt |
 | CN 06/12 | **M3 - Sẵn sàng nộp** | Tag `v1.0`, đóng gói nộp |
-| T2 07/12 | Hạn nộp (dự kiến) | |
+| **T3 08/12** | **Báo cáo cuối** | Thuyết trình slide + demo; nộp một phần báo cáo (chưa cần bản hoàn chỉnh) |
 
 **Sau M2 (29/11) chỉ được:** sửa bug, làm đẹp UI, viết tài liệu, và làm điểm cộng đã được duyệt. Mọi thay đổi interface sau M0 phải theo quy trình ở A7.
 
@@ -285,34 +285,34 @@ Nguồn của GitHub Issues. Cột Issue dẫn tới issue tương ứng.
 
 | Mã | Issue | Tên | Người | Hạn | Phụ thuộc | Milestone |
 |---|---|---|---|---|---|---|
-| PM-01 | [#1](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/1) | Họp kickoff | Sơn | 13/11 | - | M0 |
+| PM-01 | [#1](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/1) | Họp kickoff | Sơn | 15/11 | - | M0 |
 | PM-02 | [#2](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/2) | Hỏi giảng viên | Sơn | 13/11 | - | M0 |
 | DV-01 | [#3](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/3) | Dựng repo và quy trình | Sơn | 12/11 | - | M0 |
-| ALL-01 | [#4](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/4) | Cài môi trường | Cả nhóm | 13/11 | DV-01 ([#3](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/3)) | M0 |
-| ALL-02 | [#5](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/5) | Bài tập toán AMM | Cả nhóm | 14/11 | - | M0 |
-| ALL-03 | [#6](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/6) | Review ARCHITECTURE + PLAN | Cả nhóm | 14/11 | - | M0 |
-| ALL-04 | [#7](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/7) | Học Foundry cơ bản | Minh | 15/11 | DV-01 ([#3](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/3)) | M0 |
+| ALL-01 | [#4](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/4) | Cài môi trường | Cả nhóm | 17/11 | DV-01 ([#3](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/3)) | M0 |
+| ALL-02 | [#5](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/5) | Bài tập toán AMM | Cả nhóm | 17/11 | - | M0 |
+| ALL-03 | [#6](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/6) | Review ARCHITECTURE + PLAN | Cả nhóm | 17/11 | - | M0 |
+| ALL-04 | [#7](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/7) | Học Foundry cơ bản | Minh | 17/11 | DV-01 ([#3](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/3)) | M0 |
 | SC-01 | [#8](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/8) | Interface + chốt `interface-v1` | Sơn | 15/11 | DV-01 ([#3](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/3)), ALL-03 ([#6](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/6)) | M0 |
-| SC-02 | [#9](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/9) | Kiểm chứng OZ v5 (Governor, DEXToken) | Minh | 15/11 | DV-01 ([#3](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/3)) | M0 |
+| SC-02 | [#9](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/9) | Kiểm chứng OZ v5 (Governor, DEXToken) | Minh | 17/11 | DV-01 ([#3](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/3)) | M0 |
 | DV-02 | [#10](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/10) | Định dạng deployments + export | Sơn | 15/11 | SC-01 ([#8](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/8)) | M0 |
 | DV-03 | [#11](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/11) | Xin Sepolia ETH | Sơn | 15/11 | - | M0 |
-| FE-01 | [#12](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/12) | Khung frontend + ví + thử offline | Nhàn | 15/11 | DV-01 ([#3](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/3)) | M0 |
-| FE-02 | [#13](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/13) | Wireframe 4 trang | Nhàn | 15/11 | - | M0 |
-| BE-01 | [#14](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/14) | Khung backend + IPFS + so CID | Quyền | 15/11 | DV-01 ([#3](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/3)) | M0 |
-| BE-02 | [#15](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/15) | Khóa RSA auditor + master key | Quyền | 15/11 | - | M0 |
+| FE-01 | [#12](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/12) | Khung frontend + ví + thử offline | Nhàn | 17/11 | DV-01 ([#3](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/3)) | M0 |
+| FE-02 | [#13](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/13) | Wireframe 4 trang | Nhàn | 17/11 | - | M0 |
+| BE-01 | [#14](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/14) | Khung backend + IPFS + so CID | Quyền | 19/11 | DV-01 ([#3](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/3)) | M0 |
+| BE-02 | [#15](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/15) | Khóa RSA auditor + master key | Quyền | 19/11 | - | M0 |
 | SC-10 | [#16](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/16) | AMMPair | Sơn | 18/11 | SC-01 ([#8](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/8)) | M1 |
 | SC-11 | [#17](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/17) | AMMRouter | Sơn | 20/11 | SC-10 ([#16](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/16)) | M1 |
 | SC-12 | [#18](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/18) | Fuzz + invariant | Sơn | 22/11 | SC-11 ([#17](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/17)) | M1 |
 | DV-10 | [#19](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/19) | Deploy/Seed v1 + dev.sh v1 | Sơn | 22/11 | SC-11 ([#17](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/17)), SC-13 ([#20](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/20)), DV-02 ([#10](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/10)) | M1 |
-| SC-13 | [#20](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/20) | TestToken | Minh | 17/11 | SC-01 ([#8](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/8)) | M1 |
-| SC-14 | [#21](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/21) | DEXToken | Minh | 18/11 | SC-02 ([#9](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/9)) | M1 |
+| SC-13 | [#20](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/20) | TestToken | Minh | 18/11 | SC-01 ([#8](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/8)) | M1 |
+| SC-14 | [#21](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/21) | DEXToken | Minh | 19/11 | SC-02 ([#9](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/9)) | M1 |
 | SC-15 | [#22](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/22) | StakingRewards | Minh | 21/11 | SC-14 ([#21](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/21)) | M1 |
 | SC-16 | [#23](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/23) | DEXRegistry | Minh | 22/11 | SC-01 ([#8](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/8)) | M1 |
-| FE-10 | [#24](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/24) | Cấu hình contract + hooks chung | Nhàn | 17/11 | DV-02 ([#10](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/10)), FE-01 ([#12](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/12)) | M1 |
+| FE-10 | [#24](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/24) | Cấu hình contract + hooks chung | Nhàn | 18/11 | DV-02 ([#10](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/10)), FE-01 ([#12](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/12)) | M1 |
 | FE-11 | [#25](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/25) | Trang Swap v1 | Nhàn | 22/11 | FE-10 ([#24](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/24)), SC-11 ([#17](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/17)) | M1 |
-| FE-12 | [#26](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/26) | Header ví/mạng/faucet | Nhàn | 18/11 | FE-01 ([#12](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/12)), SC-13 ([#20](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/20)) | M1 |
-| BE-10 | [#27](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/27) | Module crypto | Quyền | 18/11 | BE-02 ([#15](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/15)) | M1 |
-| BE-11 | [#28](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/28) | Interop Python ↔ Web Crypto | Quyền | 20/11 | BE-10 ([#27](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/27)) | M1 |
+| FE-12 | [#26](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/26) | Header ví/mạng/faucet | Nhàn | 19/11 | FE-01 ([#12](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/12)), SC-13 ([#20](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/20)) | M1 |
+| BE-10 | [#27](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/27) | Module crypto | Quyền | 20/11 | BE-02 ([#15](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/15)) | M1 |
+| BE-11 | [#28](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/28) | Interop Python ↔ Web Crypto | Quyền | 22/11 | BE-10 ([#27](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/27)) | M1 |
 | BE-12 | [#29](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/29) | Token list + logo lên IPFS | Quyền | 22/11 | BE-01 ([#14](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/14)), SC-16 ([#23](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/23)) | M1 |
 | DOC-01 | [#30](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/30) | Template báo cáo/slide + dàn ý | Quyền | 22/11 | PM-02 ([#2](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/2)) | M1 |
 | SC-20 | [#31](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/31) | Deploy/Seed đầy đủ + test quyền | Sơn | 24/11 | SC-14 ([#21](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/21)), SC-15 ([#22](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/22)), SC-16 ([#23](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/23)), SC-21 ([#36](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/36)) | M2 |

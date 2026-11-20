@@ -11,7 +11,7 @@
 
 #### ALL-01 · Cài môi trường · [#4](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/4)
 
-- **Hạn:** T6 13/11 · **Ước lượng:** 0.5 ngày · **Phụ thuộc:** DV-01 (repo đã dựng)
+- **Hạn:** T3 17/11 · **Ước lượng:** 0.5 ngày · **Phụ thuộc:** DV-01 (repo đã dựng)
 - **Mục tiêu:** ai cũng chạy được mọi phần của dự án, không chỉ phần của mình.
 - **Input:** [`docs/SETUP.md`](../SETUP.md) do Sơn viết (DV-01). Máy Windows dùng WSL2.
 - **Hướng dẫn logic:**
@@ -25,7 +25,7 @@
 
 #### ALL-02 · Bài tập toán AMM · [#5](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/5)
 
-- **Hạn:** T7 14/11 · **Ước lượng:** 0.5 ngày · **Phụ thuộc:** không
+- **Hạn:** T3 17/11 · **Ước lượng:** 0.5 ngày · **Phụ thuộc:** không
 - **Mục tiêu:** ai cũng tự tính được swap, phí, LP; đây là câu hỏi phản biện chắc chắn gặp.
 - **Input:** ARCHITECTURE mục 3, Uniswap V2 whitepaper.
 - **Hướng dẫn logic:** tính tay (hoặc Excel) với pool 1.000 A / 1.000 B, phí 0.3%:
@@ -38,14 +38,14 @@
 
 #### ALL-03 · Đọc và phản hồi ARCHITECTURE + PLAN · [#6](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/6)
 
-- **Hạn:** T7 14/11 · **Ước lượng:** 0.5 ngày · **Phụ thuộc:** không
+- **Hạn:** T3 17/11 · **Ước lượng:** 0.5 ngày · **Phụ thuộc:** không
 - **Mục tiêu:** phát hiện chỗ khó hiểu hoặc sai trước khi chốt interface.
 - **Hướng dẫn logic:** đọc kỹ phần mình phụ trách và phần mình phải dùng (ví dụ Nhàn đọc kỹ mục 4.3, 7). Ghi câu hỏi thành comment trong issue "ARCHITECTURE review".
 - **Done khi:** mỗi người có ít nhất 1 nhận xét hoặc xác nhận "đã hiểu" cho từng mục liên quan.
 
 #### PM-01 · Họp kickoff · [#1](https://github.com/ThSonDev/IS355.R11-amm-dex/issues/1)
 
-- **Hạn:** T6 13/11 · Chủ trì: Sơn
+- **Hạn:** CN 15/11 · Chủ trì: Sơn
 - Nội dung:
   - mục tiêu, lịch (A2), vai trò (A3), quy định (A5-A7);
   - chọn kênh chat và giờ họp tuần;
