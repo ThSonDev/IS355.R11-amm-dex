@@ -660,7 +660,7 @@ Khi chạy `--fresh`, xóa state Anvil và nhắc reset tài khoản MetaMask ("
 - [ ] Forge test biên `votingDelay` (vote mở ở block propose + 2).
 - [ ] Compile thử `DEXToken`, `StakingRewards.exit()`, `TestToken` với OZ v5.
 - [ ] Chạy RainbowKit chỉ với connector injected khi tắt mạng.
-- [ ] So CID giữa Kubo và Pinata cho cùng một file (CIDv1, cùng cách chia khối).
+- [x] So CID giữa Kubo và Pinata cho cùng một file (CIDv1, cùng cách chia khối): Cùng dùng chuẩn UnixFS chunk 256 KiB nên CIDv1 khớp nhau cho file đơn; hệ thống ưu tiên Kubo làm nguồn chính và dùng Pinata pin theo CID (`pinByHash`) làm bản sao dự phòng.
 - [ ] Xin Sepolia ETH cho ví deployer và ví backend.
 
 ## 15. Lịch sử thay đổi
