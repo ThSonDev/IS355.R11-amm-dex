@@ -16,3 +16,5 @@ __pycache__/
 .venv/
 deployments/anvil.json
 deployments/*.addresses.json
+keys/
+*.pem
