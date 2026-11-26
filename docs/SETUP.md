@@ -117,12 +117,13 @@ pip install -r requirements.txt      # có từ BE-01
 
 ## 6. Chạy hằng ngày
 
-*(chờ DV-10, DV-20)*
+*(bản v1 từ DV-10: chỉ Anvil + TokenA, TokenB, Pair, Router. Kubo, backend, frontend và `chain.sh` thêm ở DV-20)*
 
-- `scripts/dev.sh`: chạy tiếp từ state cũ.
+- `scripts/dev.sh`: chạy tiếp từ state cũ (`.anvil/state.json`); đã deploy thì bỏ qua deploy và seed. Script giữ terminal; Ctrl+C để dừng và lưu state.
 - `scripts/dev.sh --fresh`: xóa state, deploy và seed lại.
+- Seed v1: mỗi token mint cho ví #1 LP 100.000, #2 Trader 10.000, #3 Community 10.000; ví LP nạp pool 10.000 / 10.000; sau đó renounce owner nên chỉ còn faucet.
 - `scripts/chain.sh`: mine block, tua thời gian (dùng khi test governance, staking).
-- Dấu hiệu chạy đúng: mở `http://localhost:5173`, kết nối ví Trader, thấy reserve pool 10.000 / 10.000.
+- Dấu hiệu chạy đúng: `cast call <AMMPair> "getReserves()(uint256,uint256)"` ra 10.000e18 mỗi bên (địa chỉ trong `deployments/31337.addresses.json`). Khi có frontend: mở `http://localhost:5173`, kết nối ví Trader, thấy reserve 10.000 / 10.000.
 
 ### `deployments/<chain>.json`
 

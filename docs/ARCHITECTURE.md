@@ -581,7 +581,7 @@ ABI và địa chỉ được export sau mỗi lần deploy vào `deployments/<c
 
 1. `anvil --block-time 2 --state .anvil/state.json` (giữ nguyên địa chỉ và nonce qua các lần khởi động; tránh lỗi nonce của MetaMask).
 2. Nếu chưa có `deployments/anvil.json`, hoặc chạy với `--fresh`: `forge script Deploy.s.sol` rồi `Seed.s.sol`. Seed chỉ làm phần on-chain:
-   - mint token cho các ví demo;
+   - mint token cho các ví demo (mỗi token: #1 LP 100.000, #2 Trader 10.000, #3 Community 10.000);
    - nạp thanh khoản 10.000/10.000;
    - nạp reward vào Staking;
    - phân bổ DEX và delegate;

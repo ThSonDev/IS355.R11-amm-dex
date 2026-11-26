@@ -2,24 +2,16 @@
 pragma solidity ^0.8.24;
 
 import {Test} from "forge-std/Test.sol";
-import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import {Math} from "@openzeppelin/contracts/utils/math/Math.sol";
 import {AMMPair} from "../src/AMMPair.sol";
+import {TestToken} from "../src/TestToken.sol";
 import {AMMRouter} from "../src/AMMRouter.sol";
 import {IAMMRouter} from "../src/interfaces/IAMMRouter.sol";
 import {IAMMPair} from "../src/interfaces/IAMMPair.sol";
 
-contract RToken is ERC20 {
-    constructor(string memory s) ERC20(s, s) {}
-
-    function mint(address to, uint256 a) external {
-        _mint(to, a);
-    }
-}
-
 contract AMMRouterTest is Test {
-    RToken a;
-    RToken b;
+    TestToken a;
+    TestToken b;
     AMMPair pair;
     AMMRouter router;
     address admin = makeAddr("admin");
@@ -41,8 +33,8 @@ contract AMMRouterTest is Test {
     );
 
     function setUp() public {
-        a = new RToken("A");
-        b = new RToken("B");
+        a = new TestToken("A", "A", address(this));
+        b = new TestToken("B", "B", address(this));
         pair = new AMMPair(address(a), address(b), admin);
         router = new AMMRouter(address(pair));
         a.mint(user, 1_000_000 * E);
@@ -177,7 +169,9 @@ contract AMMRouterTest is Test {
         uint256 before = b.balanceOf(other);
 
         vm.expectEmit(true, true, false, true);
-        emit SwapExecuted(user, address(a), address(b), 100 * E, quoted, 100 * E * 30 / 10000, 1000 * E, 1000 * E, other);
+        emit SwapExecuted(
+            user, address(a), address(b), 100 * E, quoted, 100 * E * 30 / 10000, 1000 * E, 1000 * E, other
+        );
         vm.prank(user);
         uint256 out = router.swapTokens(address(a), 100 * E, quoted, other, FAR);
 
@@ -293,7 +287,7 @@ contract AMMRouterTest is Test {
         _add(1000 * E, 2500 * E);
         amountIn = bound(amountIn, 1e6, 100_000 * E);
         address tin = dir ? address(a) : address(b);
-        RToken tout = dir ? b : a;
+        TestToken tout = dir ? b : a;
         uint256 quoted = router.getAmountOut(tin, amountIn);
         uint256 before = tout.balanceOf(user);
         vm.prank(user);
