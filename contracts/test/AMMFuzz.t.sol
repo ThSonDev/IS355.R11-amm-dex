@@ -4,18 +4,18 @@ pragma solidity ^0.8.24;
 import {Test} from "forge-std/Test.sol";
 import {AMMPair} from "../src/AMMPair.sol";
 import {AMMRouter} from "../src/AMMRouter.sol";
-import {HToken} from "./invariant/Handler.sol";
+import {TestToken} from "../src/TestToken.sol";
 
 contract AMMFuzzTest is Test {
-    HToken a;
-    HToken b;
+    TestToken a;
+    TestToken b;
     AMMPair pair;
     AMMRouter router;
     address user = makeAddr("user");
 
     function setUp() public {
-        a = new HToken("A");
-        b = new HToken("B");
+        a = new TestToken("A", "A", address(this));
+        b = new TestToken("B", "B", address(this));
         pair = new AMMPair(address(a), address(b), makeAddr("admin"));
         router = new AMMRouter(address(pair));
         a.mint(user, 1e30);
@@ -36,7 +36,7 @@ contract AMMFuzzTest is Test {
         uint256 rOut = dir ? y : x;
         amountIn = bound(amountIn, 1e3, rIn);
         address tin = dir ? address(a) : address(b);
-        HToken tout = dir ? b : a;
+        TestToken tout = dir ? b : a;
 
         uint256 quoted = router.getAmountOut(tin, amountIn);
         assertEq(quoted, amountIn * 9970 * rOut / (rIn * 10000 + amountIn * 9970));

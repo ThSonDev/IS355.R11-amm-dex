@@ -2,24 +2,16 @@
 pragma solidity ^0.8.24;
 
 import {Test} from "forge-std/Test.sol";
-import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import {Math} from "@openzeppelin/contracts/utils/math/Math.sol";
 import {AMMPair} from "../../src/AMMPair.sol";
 import {AMMRouter} from "../../src/AMMRouter.sol";
-
-contract HToken is ERC20 {
-    constructor(string memory s) ERC20(s, s) {}
-
-    function mint(address to, uint256 a) external {
-        _mint(to, a);
-    }
-}
+import {TestToken} from "../../src/TestToken.sol";
 
 /// @dev Bounded add/swap/remove/donate by several actors. After each op it checks, with exact integer math,
 ///      that k and sqrt(k)/totalSupply did not decrease (they are only allowed to rise through fees and rounding).
 contract Handler is Test {
-    HToken public a;
-    HToken public b;
+    TestToken public a;
+    TestToken public b;
     AMMPair public pair;
     AMMRouter public router;
     address[] public actors;
@@ -33,13 +25,11 @@ contract Handler is Test {
     uint256 public rawSwapsTried;
     uint256 public rawSwapsOk;
 
-    constructor(HToken _a, HToken _b, AMMPair _pair, AMMRouter _router) {
+    constructor(TestToken _a, TestToken _b, AMMPair _pair, AMMRouter _router) {
         (a, b, pair, router) = (_a, _b, _pair, _router);
         for (uint256 i = 0; i < 3; i++) {
             address u = makeAddr(string.concat("actor", vm.toString(i)));
             actors.push(u);
-            _a.mint(u, 1e30);
-            _b.mint(u, 1e30);
             vm.startPrank(u);
             _a.approve(address(_router), type(uint256).max);
             _b.approve(address(_router), type(uint256).max);

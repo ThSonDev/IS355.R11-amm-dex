@@ -6,21 +6,26 @@ import {Test} from "forge-std/Test.sol";
 import {AMMPair} from "../../src/AMMPair.sol";
 import {AMMRouter} from "../../src/AMMRouter.sol";
 import {console} from "forge-std/console.sol";
-import {Handler, HToken} from "./Handler.sol";
+import {Handler} from "./Handler.sol";
+import {TestToken} from "../../src/TestToken.sol";
 
 contract AMMInvariantTest is StdInvariant, Test {
-    HToken a;
-    HToken b;
+    TestToken a;
+    TestToken b;
     AMMPair pair;
     AMMRouter router;
     Handler handler;
 
     function setUp() public {
-        a = new HToken("A");
-        b = new HToken("B");
+        a = new TestToken("A", "A", address(this));
+        b = new TestToken("B", "B", address(this));
         pair = new AMMPair(address(a), address(b), makeAddr("admin"));
         router = new AMMRouter(address(pair));
         handler = new Handler(a, b, pair, router);
+        for (uint256 i = 0; i < 3; i++) {
+            a.mint(handler.actors(i), 1e30);
+            b.mint(handler.actors(i), 1e30);
+        }
 
         // asymmetric start: 1000 A : 4000 B
         address seed = handler.actors(0);

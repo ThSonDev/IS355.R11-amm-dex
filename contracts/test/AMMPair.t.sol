@@ -2,23 +2,15 @@
 pragma solidity ^0.8.24;
 
 import {Test} from "forge-std/Test.sol";
-import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import {IAccessControl} from "@openzeppelin/contracts/access/IAccessControl.sol";
 import {Math} from "@openzeppelin/contracts/utils/math/Math.sol";
 import {AMMPair} from "../src/AMMPair.sol";
+import {TestToken} from "../src/TestToken.sol";
 import {IAMMPair} from "../src/interfaces/IAMMPair.sol";
 
-contract MockToken is ERC20 {
-    constructor(string memory s) ERC20(s, s) {}
-
-    function mint(address to, uint256 a) external {
-        _mint(to, a);
-    }
-}
-
 contract AMMPairTest is Test {
-    MockToken a;
-    MockToken b;
+    TestToken a;
+    TestToken b;
     AMMPair pair;
     address admin = makeAddr("admin");
     address lp = makeAddr("lp");
@@ -40,8 +32,8 @@ contract AMMPairTest is Test {
     event FeeUpdated(uint16 oldFeeBps, uint16 newFeeBps);
 
     function setUp() public {
-        a = new MockToken("A");
-        b = new MockToken("B");
+        a = new TestToken("A", "A", address(this));
+        b = new TestToken("B", "B", address(this));
         pair = new AMMPair(address(a), address(b), admin);
         a.mint(lp, 1_000_000 * E);
         b.mint(lp, 1_000_000 * E);
