@@ -108,7 +108,9 @@ contract Handler is Test {
         amountIn = bound(amountIn, 1e3, (zeroForOne ? r0 : r1) / 2 + 1e3);
         (uint256 k0, uint256 s0) = _state();
         vm.prank(u);
-        try router.swapTokens(zeroForOne ? address(a) : address(b), amountIn, 0, u, block.timestamp) returns (uint256 out) {
+        try router.swapTokens(zeroForOne ? address(a) : address(b), amountIn, 0, u, block.timestamp) returns (
+            uint256 out
+        ) {
             swaps++;
             _checkFee(r0, r1, zeroForOne ? 0 : out, zeroForOne ? out : 0);
         } catch {

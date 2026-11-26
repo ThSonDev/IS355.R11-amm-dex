@@ -177,7 +177,9 @@ contract AMMRouterTest is Test {
         uint256 before = b.balanceOf(other);
 
         vm.expectEmit(true, true, false, true);
-        emit SwapExecuted(user, address(a), address(b), 100 * E, quoted, 100 * E * 30 / 10000, 1000 * E, 1000 * E, other);
+        emit SwapExecuted(
+            user, address(a), address(b), 100 * E, quoted, 100 * E * 30 / 10000, 1000 * E, 1000 * E, other
+        );
         vm.prank(user);
         uint256 out = router.swapTokens(address(a), 100 * E, quoted, other, FAR);
 
