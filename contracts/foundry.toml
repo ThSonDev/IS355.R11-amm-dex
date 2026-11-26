@@ -9,3 +9,5 @@ remappings = [
   "@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/",
   "forge-std/=lib/forge-std/src/",
 ]
+# scripts write deployments/<chainId>.addresses.json; tests write a throwaway copy under another chain id
+fs_permissions = [{ access = "read-write", path = "../deployments" }]
