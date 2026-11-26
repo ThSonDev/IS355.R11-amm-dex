@@ -34,7 +34,7 @@
   2. Quy ước nơi lưu:
      - public key có thể commit, vì nó công khai;
      - private key nằm ngoài repo hoặc trong thư mục đã có trong `.gitignore`.
-  3. Sinh `SERVER_MASTER_KEY` (32 byte ngẫu nhiên, mã hóa base64) và ghi hướng dẫn vào `.env.example`.
+  3. Sinh `SERVER_MASTER_KEY` (32 byte ngẫu nhiên, ghi dạng 64 ký tự hex, không có tiền tố `0x`; xem SETUP mục 4) và ghi hướng dẫn vào `.env.example`.
 - **Output:** `backend/scripts/gen_keys.py`, hướng dẫn trong README backend.
 - **Done khi:** chạy script ra đúng định dạng; `.gitignore` chặn private key.
 
