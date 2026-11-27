@@ -256,7 +256,7 @@ Chi tiết hành vi (chốt khi làm SC-11, giống V2):
 
 ERC20 + ERC20Permit + ERC20Votes. Override bắt buộc trong OZ v5: `_update(...) override(ERC20, ERC20Votes)` và `nonces(...) override(ERC20Permit, Nonces)`.
 
-**Cung cố định 1.000.000 DEX** mint cho deployer khi deploy; không có hàm mint. Phân bổ lúc seed:
+**Cung cố định 1.000.000 DEX** mint cho deployer khi deploy; không có hàm mint. Constructor: `constructor(address recipient)` (deploy truyền địa chỉ deployer); name `"DEX Token"`, symbol `"DEX"`, hằng `TOTAL_SUPPLY`. Phân bổ lúc seed:
 
 | Nơi nhận | Tỷ lệ | Ghi chú |
 |---|---|---|
@@ -308,6 +308,14 @@ error InsufficientRewardBalance();               // không giữ đủ DEX cho r
 **Sinh `DEXGovernor` bằng [OpenZeppelin Contracts Wizard](https://wizard.openzeppelin.com/#governor)** với bộ: Settings, CountingSimple, Votes, QuorumFraction, TimelockControl. Không viết override bằng tay.
 
 Clock của ERC20Votes mặc định là `block.number`, nên mọi tham số tính theo **block**.
+
+Thay đổi duy nhất so với code Wizard: ba tham số Settings truyền qua constructor (kiểu dữ liệu theo `GovernorSettings` của OZ v5.7):
+
+```solidity
+constructor(IVotes token, TimelockController timelock,
+            uint48 votingDelay, uint32 votingPeriod, uint256 proposalThreshold)
+// GovernorVotesQuorumFraction(4) cố định; name = "DEXGovernor"
+```
 
 | Tham số | Anvil (block 2s) | Sepolia (~12s/block) |
 |---|---|---|
@@ -656,14 +664,20 @@ Khi chạy `--fresh`, xóa state Anvil và nhắc reset tài khoản MetaMask ("
 
 ## 14. Kiểm chứng trước khi chốt interface (15/11)
 
-- [ ] Sinh `DEXGovernor` bằng OZ Wizard v5. Đối chiếu kiểu tham số của `GovernorSettings` và danh sách override.
-- [ ] Forge test biên `votingDelay` (vote mở ở block propose + 2).
-- [ ] Compile thử `DEXToken`, `StakingRewards.exit()`, `TestToken` với OZ v5.
+- [x] Sinh `DEXGovernor` bằng OZ Wizard v5. Đối chiếu kiểu tham số của `GovernorSettings` và danh sách override. *(SC-02: `uint48`/`uint32`/`uint256`; override: `state`, `proposalNeedsQueuing`, `proposalThreshold`, `_queueOperations`, `_executeOperations`, `_cancel`, `_executor`.)*
+- [x] Forge test biên `votingDelay` (vote mở ở block propose + 2). *(SC-02: `test/DEXGovernor.t.sol`.)*
+- [ ] Compile thử `DEXToken`, `StakingRewards.exit()`, `TestToken` với OZ v5. *(`DEXToken`, `TestToken` đã compile; còn `StakingRewards` ở SC-15.)*
 - [ ] Chạy RainbowKit chỉ với connector injected khi tắt mạng.
 - [ ] So CID giữa Kubo và Pinata cho cùng một file (CIDv1, cùng cách chia khối).
 - [ ] Xin Sepolia ETH cho ví deployer và ví backend.
 
 ## 15. Lịch sử thay đổi
+
+**SC-02 (2026-11-26)**, kiểm chứng OZ v5.7 cho Governor và DEXToken:
+
+- Ghi chữ ký constructor của `DEXGovernor` (4.6): `votingDelay` là `uint48`, `votingPeriod` là `uint32`, `proposalThreshold` là `uint256`.
+- Xác nhận override của `DEXToken` khớp 4.4 (`_update`, `nonces`); Wizard không chọn clock theo timestamp, giữ `block.number`.
+- Xác nhận bằng test: vote ở block propose + 1 revert (Pending), ở propose + 2 được (Active); quorum 4% = 40.000 DEX.
 
 **v0.3 (2026-11-12)**, khi viết interface (SC-01):
 
