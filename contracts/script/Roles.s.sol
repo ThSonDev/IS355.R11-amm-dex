@@ -20,6 +20,8 @@ contract Roles is ScriptBase {
         _owner("TokenB");
         _role("AMMPair", "DEFAULT_ADMIN", bytes32(0));
         _role("AMMPair", "FEE_SETTER", keccak256("FEE_SETTER_ROLE"));
+        _role("StakingRewards", "DEFAULT_ADMIN", bytes32(0));
+        _role("StakingRewards", "REWARD_DISTRIBUTOR", keccak256("REWARD_DISTRIBUTOR_ROLE"));
         _role("Timelock", "PROPOSER", keccak256("PROPOSER_ROLE"));
         _role("Timelock", "CANCELLER", keccak256("CANCELLER_ROLE"));
         _role("Timelock", "EXECUTOR", keccak256("EXECUTOR_ROLE"));

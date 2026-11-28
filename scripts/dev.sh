@@ -38,10 +38,11 @@ for _ in $(seq 50); do
   sleep 0.2
 done
 
-# Deployed already? The last contract Deploy creates must be listed and have code on this chain.
+# Deployed already? The last contract Deploy creates must have code on this chain. An addresses file
+# without StakingRewards comes from an older Deploy.s.sol and is deployed again.
 deployed=0
 if [ -f "$ADDRS" ]; then
-  last=$(python3 -c 'import json,sys;print(json.load(open(sys.argv[1])).get("DEXRegistry",""))' "$ADDRS")
+  last=$(python3 -c 'import json,sys;d=json.load(open(sys.argv[1]));print(d["DEXRegistry"] if "StakingRewards" in d else "")' "$ADDRS")
   [ -n "$last" ] && [ "$(cast code "$last" --rpc-url "$RPC_URL")" != "0x" ] && deployed=1
 fi
 if [ "$deployed" = 0 ]; then

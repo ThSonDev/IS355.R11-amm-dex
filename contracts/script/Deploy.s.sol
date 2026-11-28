@@ -9,6 +9,7 @@ import {DEXGovernor} from "../src/DEXGovernor.sol";
 import {AMMPair} from "../src/AMMPair.sol";
 import {AMMRouter} from "../src/AMMRouter.sol";
 import {DEXRegistry} from "../src/DEXRegistry.sol";
+import {StakingRewards} from "../src/StakingRewards.sol";
 
 /// @notice Deploys every contract in the SC-20 order and configures the Timelock (ARCHITECTURE 4.6, 4.8).
 /// @dev The whole DEX supply goes to the deployer; Seed distributes it.
@@ -49,10 +50,8 @@ contract Deploy is ScriptBase {
         AMMPair pair = new AMMPair(address(tokenA), address(tokenB), address(timelock));
         AMMRouter router = new AMMRouter(address(pair));
 
-        // TODO(SC-15): deploy StakingRewards here, before the Registry:
-        //   new StakingRewards(address(pair), address(dex), address(timelock), deployer)
-        // and add its "StakingRewards" label below. See the matching TODO(SC-15) in Seed.s.sol.
-
+        // Timelock is admin and distributor; the deployer is distributor only until Seed funds the first period.
+        StakingRewards staking = new StakingRewards(address(pair), address(dex), address(timelock), deployer);
         DEXRegistry registry = new DEXRegistry(deployer);
         vm.stopBroadcast();
 
@@ -63,6 +62,7 @@ contract Deploy is ScriptBase {
         vm.serializeAddress(JSON, "DEXGovernor", address(governor));
         vm.serializeAddress(JSON, "AMMPair", address(pair));
         vm.serializeAddress(JSON, "AMMRouter", address(router));
+        vm.serializeAddress(JSON, "StakingRewards", address(staking));
         vm.writeJson(vm.serializeAddress(JSON, "DEXRegistry", address(registry)), _addressesPath());
     }
 

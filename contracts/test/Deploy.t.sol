@@ -12,6 +12,7 @@ import {DEXToken} from "../src/DEXToken.sol";
 import {DEXGovernor} from "../src/DEXGovernor.sol";
 import {AMMPair} from "../src/AMMPair.sol";
 import {DEXRegistry} from "../src/DEXRegistry.sol";
+import {StakingRewards} from "../src/StakingRewards.sol";
 
 string constant TEST_MNEMONIC = "test test test test test test test test test test test junk";
 
@@ -66,7 +67,7 @@ contract TestRoles is Roles {
     }
 }
 
-/// @notice SC-20: Deploy + Seed in-process; every right of ARCHITECTURE 4.8 except StakingRewards (SC-15).
+/// @notice SC-20: Deploy + Seed in-process; every right of ARCHITECTURE 4.8.
 /// @dev setUp runs once, so the addresses file is written by one test run only.
 contract DeployTest is Test {
     string constant FILE = "../deployments/test-anvil.addresses.json";
@@ -88,6 +89,7 @@ contract DeployTest is Test {
     DEXGovernor governor;
     AMMPair pair;
     DEXRegistry registry;
+    StakingRewards staking;
 
     /// @dev (contract, role, account) -> still held, replayed from the recorded events.
     mapping(bytes32 => bool) held;
@@ -117,6 +119,7 @@ contract DeployTest is Test {
         governor = DEXGovernor(payable(_at("DEXGovernor")));
         pair = AMMPair(_at("AMMPair"));
         registry = DEXRegistry(_at("DEXRegistry"));
+        staking = StakingRewards(_at("StakingRewards"));
     }
 
     function _at(string memory label) internal view returns (address) {
@@ -124,11 +127,13 @@ contract DeployTest is Test {
     }
 
     function test_AddressesFile_And_Wiring() public view {
-        assertEq(vm.parseJsonKeys(json, ".").length, 8);
+        assertEq(vm.parseJsonKeys(json, ".").length, 9);
         assertEq(pair.token0(), address(tokenA));
         assertEq(pair.token1(), address(tokenB));
         assertEq(address(governor.token()), address(dex));
         assertEq(governor.timelock(), address(timelock));
+        assertEq(staking.stakingToken(), address(pair));
+        assertEq(staking.rewardToken(), address(dex));
     }
 
     function test_AnvilGovernanceParams() public view {
@@ -155,12 +160,31 @@ contract DeployTest is Test {
         assertEq(dex.balanceOf(lp), 100_000 ether);
         assertEq(dex.balanceOf(trader), 100_000 ether);
         assertEq(dex.balanceOf(community), 100_000 ether);
-        assertEq(dex.balanceOf(deployer), 400_000 ether); // staking share, until SC-15
+        assertEq(dex.balanceOf(address(staking)), 400_000 ether);
+        assertEq(dex.balanceOf(deployer), 0);
         assertEq(dex.delegates(lp), lp);
         assertEq(dex.delegates(trader), trader);
         assertEq(dex.delegates(community), address(0));
         assertEq(dex.delegates(deployer), address(0));
         assertEq(dex.delegates(address(timelock)), address(0));
+    }
+
+    function test_RewardPeriod_Started() public view {
+        assertEq(staking.rewardRate(), uint256(400_000 ether) / 30 days);
+        assertEq(staking.periodFinish(), block.timestamp + 30 days);
+    }
+
+    function test_Staking_Smoke_StakeThenEarn() public {
+        uint256 amount = pair.balanceOf(lp);
+        vm.startPrank(lp);
+        pair.approve(address(staking), amount);
+        staking.stake(amount);
+        vm.stopPrank();
+        assertEq(staking.earned(lp), 0);
+
+        vm.warp(block.timestamp + 1 days);
+        // The only staker earns the whole first day, minus rounding.
+        assertApproxEqAbs(staking.earned(lp), staking.rewardRate() * 1 days, 1e6);
     }
 
     /// @dev The exact set of role holders: anything granted to anyone else makes the count differ.
@@ -178,7 +202,11 @@ contract DeployTest is Test {
         _assertHolds(address(registry), registry.TOKEN_LIST_MANAGER_ROLE(), deployer);
         _assertHolds(address(registry), registry.RECEIPT_ISSUER_ROLE(), backend);
 
-        assertEq(heldCount, 9);
+        _assertHolds(address(staking), staking.DEFAULT_ADMIN_ROLE(), address(timelock));
+        _assertHolds(address(staking), staking.REWARD_DISTRIBUTOR_ROLE(), address(timelock));
+
+        assertEq(heldCount, 11);
+        assertFalse(staking.hasRole(staking.REWARD_DISTRIBUTOR_ROLE(), deployer));
         assertFalse(registry.hasRole(registry.AUDITOR_ROLE(), auditor));
     }
 
