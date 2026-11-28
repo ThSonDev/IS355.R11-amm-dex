@@ -666,7 +666,7 @@ Khi chạy `--fresh`, xóa state Anvil và nhắc reset tài khoản MetaMask ("
 
 - [x] Sinh `DEXGovernor` bằng OZ Wizard v5. Đối chiếu kiểu tham số của `GovernorSettings` và danh sách override. *(SC-02: `uint48`/`uint32`/`uint256`; override: `state`, `proposalNeedsQueuing`, `proposalThreshold`, `_queueOperations`, `_executeOperations`, `_cancel`, `_executor`.)*
 - [x] Forge test biên `votingDelay` (vote mở ở block propose + 2). *(SC-02: `test/DEXGovernor.t.sol`.)*
-- [ ] Compile thử `DEXToken`, `StakingRewards.exit()`, `TestToken` với OZ v5. *(`DEXToken`, `TestToken` đã compile; còn `StakingRewards` ở SC-15.)*
+- [x] Compile thử `DEXToken`, `StakingRewards.exit()`, `TestToken` với OZ v5. *(SC-15: `exit()` gọi `_withdraw` + `_getReward` nội bộ.)*
 - [ ] Chạy RainbowKit chỉ với connector injected khi tắt mạng.
 - [ ] So CID giữa Kubo và Pinata cho cùng một file (CIDv1, cùng cách chia khối).
 - [ ] Xin Sepolia ETH cho ví deployer và ví backend.
