@@ -303,6 +303,10 @@ error InsufficientRewardBalance();               // không giữ đủ DEX cho r
 - Chỉ gọi khi `block.timestamp >= periodFinish`, không cộng dồn giữa kỳ, để đơn giản.
 - Contract phải đang giữ đủ DEX cho `rewardRate * duration`.
 
+**Kỳ thưởng đầu (seed):** 400.000 DEX, `duration = 30 days`. Kỳ này đủ dài để phủ từ lúc deploy Sepolia tới buổi báo cáo. Anvil chạy theo giờ thật, nên trước demo phải chạy `dev.sh --fresh`.
+
+**Hạn chế đã chấp nhận:** trong kỳ, khoảng thời gian không có ai stake (`totalSupply == 0`) thì không trả thưởng cho ai. Phần DEX tương ứng (khoảng 13.333 DEX/ngày với kỳ đầu) vẫn bị tính trong `_rewardsReserved`, nên không trả ra được và không dùng lại được cho kỳ sau. Contract không có hàm rút. Synthetix gốc cũng bỏ qua khoảng thời gian này. Nhóm giữ nguyên vì token chỉ để thử nghiệm và thiết kế đơn giản hơn; điểm này ghi vào phần hạn chế của báo cáo. Ngoài ra, phần dư do làm tròn `rate * duration` (dưới 2.592.000 wei) cũng nằm lại trong contract.
+
 ### 4.6 `DEXGovernor` + `TimelockController`
 
 **Sinh `DEXGovernor` bằng [OpenZeppelin Contracts Wizard](https://wizard.openzeppelin.com/#governor)** với bộ: Settings, CountingSimple, Votes, QuorumFraction, TimelockControl. Không viết override bằng tay.
@@ -399,7 +403,7 @@ Ví demo dùng các tài khoản mặc định của Anvil: #0 Admin/Deployer, #
 
 \*\* `TimelockController` của OZ v5 tự cấp `DEFAULT_ADMIN` cho chính nó trong constructor. Sau khi deployer renounce, muốn đổi role của Timelock chỉ có cách tạo proposal và chờ thực thi.
 
-Cho tới khi có `StakingRewards` (SC-15), 40% DEX (400.000) nằm ở deployer và **không delegate**, nên không tham gia bỏ phiếu. Không được delegate phần này: nó lớn hơn tổng phiếu của ba ví demo.
+Sau seed, `StakingRewards` chỉ còn **Timelock** vừa là admin vừa là `REWARD_DISTRIBUTOR`: mở kỳ thưởng mới phải qua proposal. Deployer không còn giữ DEX (40% đã chuyển vào `StakingRewards`).
 
 ## 5. IPFS và phân quyền
 
