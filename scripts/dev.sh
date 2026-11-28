@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
-# dev.sh v1: Anvil + deploy/seed (only when the chain has no deployment yet) + deployments/anvil.json.
+# dev.sh v1: Anvil + deploy/seed (only when the chain has no deployment yet) + deployments/anvil.json,
+# then the on-chain role table.
 # Usage: scripts/dev.sh [--fresh]     --fresh drops the Anvil state and deploys again.
-# Env:   RPC_URL (default http://127.0.0.1:8545), MNEMONIC (read by the forge scripts).
+# Env:   RPC_URL (default http://127.0.0.1:8545); MNEMONIC and DEPLOYER_PRIVATE_KEY are read by the
+#        forge scripts (leave unset for Anvil: the pre-funded accounts are used).
 set -euo pipefail
 cd "$(dirname "$0")/.."
 export PATH="$PATH:$HOME/.foundry/bin"
@@ -36,11 +38,11 @@ for _ in $(seq 50); do
   sleep 0.2
 done
 
-# Deployed already? The addresses file must exist and the pair must have code on this chain.
+# Deployed already? The last contract Deploy creates must be listed and have code on this chain.
 deployed=0
 if [ -f "$ADDRS" ]; then
-  pair=$(python3 -c 'import json,sys;print(json.load(open(sys.argv[1]))["AMMPair"])' "$ADDRS")
-  [ "$(cast code "$pair" --rpc-url "$RPC_URL")" != "0x" ] && deployed=1
+  last=$(python3 -c 'import json,sys;print(json.load(open(sys.argv[1])).get("DEXRegistry",""))' "$ADDRS")
+  [ -n "$last" ] && [ "$(cast code "$last" --rpc-url "$RPC_URL")" != "0x" ] && deployed=1
 fi
 if [ "$deployed" = 0 ]; then
   (cd contracts && forge script script/Deploy.s.sol --rpc-url "$RPC_URL" --broadcast >/dev/null \
@@ -51,5 +53,6 @@ else
 fi
 
 python3 scripts/export-deployments.py --chain anvil
+(cd contracts && forge script script/Roles.s.sol --rpc-url "$RPC_URL") | sed -n '/== Logs ==/,$p'
 echo "Anvil running on $RPC_URL (Ctrl+C to stop; state saved to $STATE)."
 wait "$ANVIL"
