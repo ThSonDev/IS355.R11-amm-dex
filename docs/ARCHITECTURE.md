@@ -388,7 +388,7 @@ Ví demo dùng các tài khoản mặc định của Anvil: #0 Admin/Deployer, #
 | StakingRewards | `REWARD_DISTRIBUTOR` | Deployer (để nạp kỳ thưởng đầu) + Timelock | Deployer **renounce**; còn Timelock |
 | Timelock | `PROPOSER`, `CANCELLER` | Governor | Governor |
 | Timelock | `EXECUTOR` | `address(0)` = ai cũng được | như cũ |
-| Timelock | `DEFAULT_ADMIN` | Deployer | **Renounce** |
+| Timelock | `DEFAULT_ADMIN` | Deployer + chính Timelock | Deployer **renounce**; còn chính Timelock** |
 | DEXRegistry | `DEFAULT_ADMIN` | Ví Admin (#0) | Ví Admin (#0)* |
 | DEXRegistry | `TOKEN_LIST_MANAGER` | Ví Admin (#0) | Ví Admin (#0) |
 | DEXRegistry | `RECEIPT_ISSUER` | Ví Backend (#5) | Ví Backend (#5) |
@@ -396,6 +396,10 @@ Ví demo dùng các tài khoản mặc định của Anvil: #0 Admin/Deployer, #
 | DEXToken, DEXGovernor | không có role admin | - | - |
 
 \* Registry không giữ tài sản. Admin của Registry là ví riêng (không phải Timelock) để demo cấp/thu hồi role trong vài giây. Bản production nên chuyển cho Timelock (ghi trong báo cáo).
+
+\*\* `TimelockController` của OZ v5 tự cấp `DEFAULT_ADMIN` cho chính nó trong constructor. Sau khi deployer renounce, muốn đổi role của Timelock chỉ có cách tạo proposal và chờ thực thi.
+
+Cho tới khi có `StakingRewards` (SC-15), 40% DEX (400.000) nằm ở deployer và **không delegate**, nên không tham gia bỏ phiếu. Không được delegate phần này: nó lớn hơn tổng phiếu của ba ví demo.
 
 ## 5. IPFS và phân quyền
 
